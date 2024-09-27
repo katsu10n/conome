@@ -26,7 +26,7 @@ services:
     environment:
       POSTGRES_DB: laravel
       POSTGRES_USER: laravel
-      POSTGRES_PASSWORD:
+      POSTGRES_PASSWORD: secret
     volumes:
       - pgdata:/var/lib/postgresql/data
 
