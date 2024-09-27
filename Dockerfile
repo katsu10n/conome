@@ -14,8 +14,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 WORKDIR /var/www/html
 
-# アプリケーションファイルのコピー
-COPY . /var/www/html
+# srcディレクトリの内容をコピー
+COPY src /var/www/html
 
 # Composerの依存関係インストール
 RUN composer install --no-dev --optimize-autoloader
