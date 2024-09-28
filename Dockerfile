@@ -30,4 +30,4 @@ RUN chown -R www-data:www-data /var/www/html
 EXPOSE $PORT
 
 # 起動コマンド
-CMD php-fpm && nginx -g 'daemon off;'
+CMD vendor/bin/heroku-php-nginx -C nginx.conf public/
