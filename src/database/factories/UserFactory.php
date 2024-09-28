@@ -27,6 +27,7 @@ class UserFactory extends Factory
         self::$num++;
 
         return [
+            'uid' => 'u' . self::$num,
             'name' => 'Test User' . self::$num,
             'email' => self::$num . '@' . self::$num,
             'password' => 'a',
