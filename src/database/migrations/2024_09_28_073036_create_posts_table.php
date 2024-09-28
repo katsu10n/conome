@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
 
             $table->text('title');
+            $table->text('content');
             $table->boolean('is_archived')->nullable();
             $table->timestampsTz();
         });
