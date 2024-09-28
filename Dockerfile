@@ -12,7 +12,7 @@ RUN docker-php-ext-install zip pdo pdo_pgsql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /var/www/html/src
+WORKDIR /var/www/html
 
 # srcディレクトリの内容をコピー
 COPY src /var/www/html
@@ -26,8 +26,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # 権限の設定
 RUN chown -R www-data:www-data /var/www/html
 
-# Heroku用のポート設定
-EXPOSE $PORT
+# 環境変数の設定
+ENV PORT=8080
 
 # 起動コマンド
-CMD vendor/bin/heroku-php-nginx -C nginx.conf public/
+CMD /bin/bash -c "nginx && php-fpm"
