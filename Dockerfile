@@ -29,5 +29,15 @@ RUN chown -R www-data:www-data /var/www/html
 # 環境変数の設定
 ENV PORT=8080
 
-# 起動コマンド
-CMD /bin/bash -c "nginx && php-fpm"
+# 起動スクリプトの作成
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# start.shをコピー
+COPY start.sh /start.sh
+
+# 実行権限を付与
+RUN chmod +x /start.sh
+
+# コマンドを変更
+CMD ["/start.sh"]
