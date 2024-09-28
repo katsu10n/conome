@@ -12,7 +12,7 @@ RUN docker-php-ext-install zip pdo pdo_pgsql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/src
 
 # srcディレクトリの内容をコピー
 COPY src /var/www/html
