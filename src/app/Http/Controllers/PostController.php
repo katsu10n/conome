@@ -4,16 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $posts = Post::with(['user', 'category'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        $categories = Category::all();
+
+        return view('pages.posts.index', compact('posts', 'categories'));
     }
 
     /**
