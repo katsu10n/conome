@@ -18,6 +18,9 @@
 
 <body class="min-h-dvh bg-white font-sans antialiased">
     {{-- @include('layouts.navigation') --}}
+
+    @include('layouts.header')
+
     <div class="mx-auto grid max-w-screen-lg grid-cols-[15rem_1fr_15rem] gap-4">
         <x-sidebar :items="$categories" />
 

@@ -1,10 +1,16 @@
-<header class="sticky top-0 border bg-white">
-    <nav class="grid grid-flow-col">
-        <x-nav-link class="text-center" :href="route('posts.index')">
-            {{ __('全ユーザー') }}
-        </x-nav-link>
-        <x-nav-link class="text-center" :href="route('posts.index')">
-            {{ __('フォロー中') }}
-        </x-nav-link>
-    </nav>
-</header>
+<nav class="border-b border-gray-200 text-center text-sm font-medium text-gray-500">
+    <ul class="-mb-px flex">
+        <li class="flex-1 cursor-pointer">
+            <a class="inline-block w-full rounded-t-lg border-b-2 border-transparent p-4 text-center hover:border-gray-300 hover:text-gray-600"
+                :href="route('posts.index')">
+                {{ __('全ユーザー') }}
+            </a>
+        </li>
+        <li class="flex-1 cursor-pointer">
+            <a class="active inline-block w-full rounded-t-lg border-b-2 border-purple-600 p-4 text-purple-600"
+                aria-current="page" :href="route('posts.index')">
+                {{ __('フォロー中') }}
+            </a>
+        </li>
+    </ul>
+</nav>

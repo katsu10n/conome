@@ -6,7 +6,7 @@
             <li>
                 {{-- <a href="{{ $item['url'] }}">{{ $item['name'] }}</a> --}}
 
-                <x-nav-link class="rounded-full" :href="$item['url']">
+                <x-nav-link class="" :href="$item['url']">
                     {{ $item['name'] }}
                 </x-nav-link>
             </li>
