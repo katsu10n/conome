@@ -13,22 +13,30 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/sticky.js'])
 </head>
 
 <body class="min-h-dvh bg-white font-sans antialiased">
-    {{-- @include('layouts.navigation') --}}
+    <div class="mx-auto max-w-screen-lg">
+        <header class="sticky top-0 grid grid-cols-[15rem_1fr_15rem] gap-4 bg-white" id="main-header">
+            <h1 class="py-4"><a href="">Conome</a></h1>
+            <x-posts.header />
+        </header>
 
-    @include('layouts.header')
+        <div class="grid grid-cols-[15rem_1fr_15rem] gap-4">
+            <div class="max-h-dvh sidebar overflow-scroll">
+                @include('layouts.sidebar-left')
+            </div>
 
-    <div class="mx-auto grid max-w-screen-lg grid-cols-[15rem_1fr_15rem] gap-4">
-        <x-sidebar :items="$categories" />
+            <main>
+                {{ $slot }}
+            </main>
 
-        <main class="">
-            {{ $slot }}
-        </main>
+            <div class="max-h-dvh sidebar overflow-scroll">
+                @include('layouts.sidebar-right')
+            </div>
 
-        <x-sidebar :items="$categories" />
+        </div>
     </div>
 </body>
 

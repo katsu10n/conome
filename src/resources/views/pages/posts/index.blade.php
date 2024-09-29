@@ -1,6 +1,5 @@
 <x-app-layout>
-    <x-posts.header />
-    <div class="max-h-dvh overflow-scroll rounded-lg bg-white">
+    <div class="rounded-lg bg-white">
 
         <ul>
             @foreach ($posts as $post)
