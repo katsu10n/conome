@@ -17,7 +17,7 @@
 </head>
 
 <body class="min-h-dvh bg-white font-sans antialiased">
-    <div class="">
+    <div class="mx-auto max-w-screen-xl">
         {{-- @include('layouts.navigation')
 
         @isset($header)
@@ -28,7 +28,7 @@
             </header>
         @endisset --}}
 
-        <main>
+        <main class="mx-auto max-w-2xl">
             {{ $slot }}
         </main>
     </div>

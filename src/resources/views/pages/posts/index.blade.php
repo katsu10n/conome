@@ -1,7 +1,9 @@
 <x-app-layout>
+    <x-posts.header />
+
     <ul>
         @foreach ($posts as $post)
-            <li class="mx-auto grid max-w-2xl grid-cols-[auto,1fr] grid-rows-[auto,1fr,auto] border p-2">
+            <li class="grid grid-cols-[auto,1fr] grid-rows-[auto,1fr,auto] border border-t-0 p-2">
                 <div class="row-span-2 mr-2">
                     <x-icons.user class="h-6 w-6 text-gray-400" />
                 </div>
