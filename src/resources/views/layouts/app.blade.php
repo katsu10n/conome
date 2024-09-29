@@ -18,12 +18,15 @@
 
 <body class="min-h-dvh bg-white font-sans antialiased">
     <div class="mx-auto max-w-screen-lg">
-        <header class="sticky top-0 grid grid-cols-[15rem_1fr_15rem] gap-4 bg-white" id="main-header">
+        <header class="sticky top-0 grid grid-cols-[15rem_1fr_15rem] gap-8 bg-white" id="main-header">
             <h1 class="py-4"><a href="">Conome</a></h1>
             <x-posts.header />
+            <div class="flex items-center">
+                <input class="rounded-full px-4 py-2" type="text" placeholder="検索（未実装）" />
+            </div>
         </header>
 
-        <div class="grid grid-cols-[15rem_1fr_15rem] gap-4">
+        <div class="grid grid-cols-[15rem_1fr_15rem] gap-8">
             <div class="max-h-dvh sidebar overflow-scroll">
                 @include('layouts.sidebar-left')
             </div>
