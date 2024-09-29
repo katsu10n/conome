@@ -13,7 +13,7 @@ class PostController extends Controller
     {
         $posts = Post::with(['user', 'category'])
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->get();
         $categories = Category::all();
 
         return view('pages.posts.index', compact('posts', 'categories'));
