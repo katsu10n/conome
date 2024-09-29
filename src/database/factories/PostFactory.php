@@ -22,7 +22,7 @@ class PostFactory extends Factory
         self::$num++;
 
         return [
-            'user_id' => 1,
+            'user_id' => random_int(1, 8),
             'category_id' => random_int(1, 8),
             'title' => 'タイトル' . self::$num,
             'content' => '内容' . self::$num,
