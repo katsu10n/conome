@@ -18,8 +18,11 @@
 
 <body class="min-h-dvh bg-white font-sans antialiased">
     <div class="mx-auto max-w-screen-lg">
-        <header class="sticky top-0 grid grid-cols-[15rem_1fr_15rem] gap-8 bg-white" id="main-header">
-            <h1 class="py-4"><a href="">Conome</a></h1>
+        <header class="sticky top-0 z-20 grid grid-cols-[15rem_1fr_15rem] gap-8 bg-white" id="main-header">
+            <div class="flex justify-between">
+                <h1 class="py-4 text-lg font-bold"><a href="">Conome</a></h1>
+                @include('layouts.navigation')
+            </div>
             <x-posts.header />
             <div class="flex items-center">
                 <input class="rounded-full px-4 py-2" type="text" placeholder="検索（未実装）" />
