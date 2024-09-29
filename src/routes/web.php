@@ -9,12 +9,8 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('posts.index');
     }
-    return view('pages.welcome');
+    return view('auth.login');
 });
-
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
