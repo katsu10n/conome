@@ -1,0 +1,15 @@
+{
+  "[blade]": {
+    "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+  },
+  "bladeFormatter.format.enabled": true, // 有効化
+  "bladeFormatter.format.indentSize": 4, // インデントサイズを4スペースに
+  "bladeFormatter.format.wrapAttributes": "auto", // 属性の折り返しを自動に
+  "bladeFormatter.format.wrapLineLength": 120, // 1行の最大長を120文字に
+  "bladeFormatter.format.useTabs": false, // タブの代わりにスペースを使用
+  "bladeFormatter.format.sortTailwindcssClasses": true, // Tailwind CSSのクラスをソート
+  "bladeFormatter.format.sortHtmlAttributes": "code-guide", // HTML属性をCode Guideの規約に従ってソート
+  "bladeFormatter.format.noMultipleEmptyLines": true, // 複数の空行を1行に圧縮
+  "bladeFormatter.format.noPhpSyntaxCheck": false, // PHPの構文チェックを有効化
+  "bladeFormatter.format.noSingleQuote": false // シングルクォートの使用を許可
+}
