@@ -17,20 +17,15 @@
 </head>
 
 <body class="min-h-dvh bg-white font-sans antialiased">
-    <div class="mx-auto max-w-screen-xl">
-        {{-- @include('layouts.navigation')
+    {{-- @include('layouts.navigation') --}}
+    <div class="mx-auto grid max-w-screen-lg grid-cols-[15rem_1fr_15rem] gap-4">
+        <x-sidebar :items="$categories" />
 
-        @isset($header)
-            <header class="bg-white shadow dark:bg-gray-800">
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endisset --}}
-
-        <main class="mx-auto max-w-2xl">
+        <main class="">
             {{ $slot }}
         </main>
+
+        <x-sidebar :items="$categories" />
     </div>
 </body>
 
