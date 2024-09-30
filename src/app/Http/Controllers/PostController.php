@@ -14,9 +14,8 @@ class PostController extends Controller
         $posts = Post::with(['user', 'category'])
             ->orderBy('created_at', 'desc')
             ->get();
-        $categories = Category::all();
 
-        return view('pages.posts.index', compact('posts', 'categories'));
+        return view('pages.posts.index', compact('posts'));
     }
 
     /**
