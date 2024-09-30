@@ -3,8 +3,8 @@
 
         <ul>
             @foreach ($posts as $post)
-                <a class="my-4 grid grid-cols-[auto,1fr] grid-rows-[auto,1fr,auto] rounded-xl border p-3 shadow-md transition-shadow duration-300 hover:bg-gray-50 hover:shadow-lg"
-                    href="">
+                <a class="my-4 grid grid-cols-[auto,1fr] grid-rows-[auto,1fr,auto] rounded-xl border p-2 shadow-md transition-shadow duration-300 hover:bg-gray-50 hover:shadow-lg"
+                    href={{ route('posts.show', $post) }}>
                     <div class="row-span-2 mr-2">
                         <x-icons.user class="h-10 w-10 text-gray-400" />
                     </div>
