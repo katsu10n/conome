@@ -21,15 +21,9 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        View::composer('layouts.sidebar-left', function ($view) {
+        View::composer(['layouts.sidebar-left', 'components.posts.modal-create'], function ($view) {
             $categories = Cache::remember('sidebar_categories', now()->addHours(24), function () {
-                return Category::select('id', 'name')->get()->map(function ($category) {
-                    return [
-                        'name' => $category->name,
-                        // 'url' => route('category.show', $category),
-                        'url' => "",
-                    ];
-                });
+                return Category::select('id', 'name')->get();
             });
 
             $view->with('categories', $categories);

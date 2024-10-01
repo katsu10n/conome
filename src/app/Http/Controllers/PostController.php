@@ -6,6 +6,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -15,23 +16,24 @@ class PostController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('pages.posts.index', compact('posts'));
+        $categories = Category::all();
+
+        return view('pages.posts.index', compact('posts', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePostRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = Auth::id();
+
+        $post = Post::create($validatedData);
+
+        return redirect()->route('posts.index')->with('success', '投稿が作成されました。');
     }
 
     public function show(Post $post)

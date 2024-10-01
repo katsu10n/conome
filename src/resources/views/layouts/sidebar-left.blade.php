@@ -1,4 +1,3 @@
-{{-- <nav class="max-h-dvh overflow-scroll"> --}}
 <nav>
     <ul>
         <div class="border-b">
