@@ -39,7 +39,7 @@
             </main>
 
             <div class="max-h-dvh sidebar overflow-scroll">
-                <x-posts.modal-create />
+                <x-posts.modal />
                 @include('layouts.sidebar-right')
             </div>
 
