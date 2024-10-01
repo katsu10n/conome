@@ -5,15 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with(['user', 'category'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $categoryId = $request->query('category');
+
+        $postsQuery = Post::with(['user', 'category'])
+            ->orderBy('created_at', 'desc');
+
+        if ($categoryId) {
+            $postsQuery->where('category_id', $categoryId);
+        }
+
+        $posts = $postsQuery->get()->map(function ($post) {
+            $post->created_at_for_humans = $post->created_at->diffForHumans();
+            return $post;
+        });
 
         return view('pages.posts.index', compact('posts'));
     }

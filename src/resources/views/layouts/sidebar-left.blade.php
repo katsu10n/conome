@@ -8,38 +8,13 @@
                 通知
             </x-nav-link>
         </div>
-        <x-nav-link href="">
+        <x-nav-link href="{{ route('posts.index') }}" :active="!request()->query('category')">
             すべて
         </x-nav-link>
         @foreach ($categories as $category)
-            <x-nav-link href="">
-                {{ $category['name'] }}
+            <x-nav-link href="{{ route('posts.index', ['category' => $category->id]) }}" :active="request()->query('category') == $category->id">
+                {{ $category->name }}
             </x-nav-link>
         @endforeach
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-        <li>aa</li>
-
     </ul>
 </nav>
