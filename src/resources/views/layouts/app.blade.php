@@ -21,7 +21,7 @@
         <header class="sticky top-0 z-20 grid grid-cols-[15rem_1fr_15rem] gap-8 bg-white" id="main-header">
             <div class="flex justify-between">
                 <h1 class="py-4 text-lg font-bold"><a href="">Conome</a></h1>
-                @include('layouts.navigation')
+                <x-user-nav-modal />
             </div>
             <x-posts.post-header />
             <div class="flex items-center">
