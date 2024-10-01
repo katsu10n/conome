@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
@@ -21,15 +22,17 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        View::composer('layouts.sidebar-left', function ($view) {
-            $categories = Cache::remember('sidebar_categories', now()->addHours(24), function () {
-                return Category::select('id', 'name')->get()->map(function ($category) {
-                    return [
-                        'name' => $category->name,
-                        // 'url' => route('category.show', $category),
-                        'url' => "",
-                    ];
-                });
+        View::composer(['layouts.sidebar-left', 'components.posts.post-form'], function ($view) {
+            $categories = Cache::remember('sidebar_categories_' . Auth::id(), now()->addHours(24), function () {
+                return Category::select('id', 'name')
+                    ->withCount(['favorites' => function ($query) {
+                        $query->where('user_id', Auth::id());
+                    }])
+                    ->get()
+                    ->map(function ($category) {
+                        $category->is_favorited = $category->favorites_count > 0;
+                        return $category;
+                    });
             });
 
             $view->with('categories', $categories);

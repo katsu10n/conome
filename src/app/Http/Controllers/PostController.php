@@ -4,66 +4,66 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index($category = null)
     {
-        $posts = Post::with(['user', 'category'])
-            ->orderBy('created_at', 'desc')
-            ->get();
-        $categories = Category::all();
+        $currentUserId = Auth::id();
 
-        return view('pages.posts.index', compact('posts', 'categories'));
+        $postsQuery = Post::with(['user', 'category'])
+            ->orderBy('created_at', 'desc');
+
+        if ($category) {
+            $postsQuery->where('category_id', $category);
+        }
+
+        $posts = $postsQuery->get()->map(function ($post) {
+            $post->created_at_for_humans = $post->created_at->diffForHumans();
+            return $post;
+        });
+
+        return view('pages.posts.index', compact('posts', 'currentUserId'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePostRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = Auth::id();
+
+        $post = Post::create($validatedData);
+
+        return redirect()->route('posts.index')->with('success', '投稿が作成されました。');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Post $post)
     {
-        //
+        $currentUserId = Auth::id();
+
+        return view('pages.posts.show', compact('post', 'currentUserId'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Post $post)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatePostRequest $request, Post $post)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
-        //
+        if (Auth::id() !== $post->user_id) {
+            return redirect()->route('posts.index');
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index');
     }
 }
