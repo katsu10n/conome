@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -19,5 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('posts', PostController::class)->only(['index', 'show', 'store', 'destroy']);
     Route::get('posts/category/{category?}', [PostController::class, 'index'])->name('posts.category');
+
+    Route::post('/categories/{category}/favorite', [FavoriteController::class, 'toggle'])->name('categories.favorite');
 });
 require __DIR__ . '/auth.php';
