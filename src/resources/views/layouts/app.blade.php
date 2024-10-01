@@ -23,7 +23,7 @@
                 <h1 class="py-4 text-lg font-bold"><a href="">Conome</a></h1>
                 @include('layouts.navigation')
             </div>
-            <x-posts.header />
+            <x-posts.post-header />
             <div class="flex items-center">
                 <input class="rounded-full px-4 py-2" type="text" placeholder="検索（未実装）" />
             </div>
@@ -39,7 +39,7 @@
             </main>
 
             <div class="max-h-dvh sidebar overflow-scroll">
-                <x-posts.modal />
+                <x-posts.post-form-modal />
                 @include('layouts.sidebar-right')
             </div>
 

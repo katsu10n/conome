@@ -18,7 +18,7 @@
 
             <div class="inline-block w-full transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:max-w-lg sm:align-middle"
                 @click.stop>
-                <x-posts.create />
+                <x-posts.post-form />
             </div>
         </div>
     </div>

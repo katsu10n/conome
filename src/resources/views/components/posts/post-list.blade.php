@@ -9,7 +9,7 @@
 <{{ $isLink ? 'a' : 'div' }} class="{{ $baseClasses }} {{ $linkClasses }}"
     {{ $isLink ? 'href=' . route('posts.show', $post) : '' }}>
     <div class="row-span-2 mr-2">
-        <x-icons.user class="h-10 w-10 text-gray-400" />
+        <x-icons.icon-user class="h-10 w-10 text-gray-400" />
     </div>
     <div class="flex flex-col">
         <div class="flex items-center justify-between gap-2">
@@ -28,11 +28,11 @@
     <div class="mt-2">
         <div class="col-span-2 flex justify-start gap-2">
             <div class="flex items-center">
-                <x-icons.comment class="mr-1 h-4 w-4" />
+                <x-icons.icon-comment class="mr-1 h-4 w-4" />
                 <span>5</span>
             </div>
             <div class="flex items-center">
-                <x-icons.heart class="mr-1 h-4 w-4" />
+                <x-icons.icon-heart class="mr-1 h-4 w-4" />
                 <span>10</span>
             </div>
         </div>

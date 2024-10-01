@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        View::composer(['layouts.sidebar-left', 'components.posts.create'], function ($view) {
+        View::composer(['layouts.sidebar-left', 'components.posts.post-form'], function ($view) {
             $categories = Cache::remember('sidebar_categories', now()->addHours(24), function () {
                 return Category::select('id', 'name')->get();
             });
