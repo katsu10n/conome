@@ -26,17 +26,17 @@
         </div>
     </div>
     <div class="mt-2">
-        <div class="col-span-2 flex justify-between gap-2">
-            <div class="flex items-center">
+        <div class="col-span-2 flex gap-2">
+            <div class="mr-8 flex items-center">
                 <x-icons.icon-comment class="mr-1 h-4 w-4" />
                 <span>5</span>
             </div>
-            <div class="flex items-center">
+            <div class="mr-8 flex items-center">
                 <x-icons.icon-heart class="mr-1 h-4 w-4" />
                 <span>10</span>
             </div>
             @if ($post->user_id === $currentUserId)
-                <form class="flex items-end" action="{{ route('posts.destroy', $post) }}" method="POST"
+                <form class="flex items-center" action="{{ route('posts.destroy', $post) }}" method="POST"
                     onsubmit="return confirm('本当に削除しますか？');">
                     @csrf
                     @method('DELETE')
