@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('posts', PostController::class)->only(['index', 'show', 'store']);
+    Route::resource('posts', PostController::class)->only(['index', 'show', 'store', 'destroy']);
     Route::get('posts/category/{category?}', [PostController::class, 'index'])->name('posts.category');
 });
 require __DIR__ . '/auth.php';

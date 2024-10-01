@@ -6,11 +6,14 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
     public function index($category = null)
     {
+        $currentUserId = Auth::id();
+
         $postsQuery = Post::with(['user', 'category'])
             ->orderBy('created_at', 'desc');
 
@@ -23,7 +26,7 @@ class PostController extends Controller
             return $post;
         });
 
-        return view('pages.posts.index', compact('posts'));
+        return view('pages.posts.index', compact('posts', 'currentUserId'));
     }
 
     public function store(StorePostRequest $request)
@@ -38,7 +41,9 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('pages.posts.show', compact('post'));
+        $currentUserId = Auth::id();
+
+        return view('pages.posts.show', compact('post', 'currentUserId'));
     }
 
     public function edit(Post $post)
@@ -53,6 +58,12 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        //
+        if (Auth::id() !== $post->user_id) {
+            return redirect()->route('posts.index');
+        }
+
+        $post->delete();
+
+        return redirect()->route('posts.index');
     }
 }

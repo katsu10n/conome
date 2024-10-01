@@ -1,4 +1,4 @@
-@props(['post', 'isLink' => true])
+@props(['post', 'isLink' => true, 'currentUserId'])
 
 @php
     $baseClasses =
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="mt-2">
-        <div class="col-span-2 flex justify-start gap-2">
+        <div class="col-span-2 flex justify-between gap-2">
             <div class="flex items-center">
                 <x-icons.icon-comment class="mr-1 h-4 w-4" />
                 <span>5</span>
@@ -35,6 +35,17 @@
                 <x-icons.icon-heart class="mr-1 h-4 w-4" />
                 <span>10</span>
             </div>
+            @if ($post->user_id === $currentUserId)
+                <form class="flex items-end" action="{{ route('posts.destroy', $post) }}" method="POST"
+                    onsubmit="return confirm('本当に削除しますか？');">
+                    @csrf
+                    @method('DELETE')
+                    <button class="flex items-center text-red-600 hover:text-red-800" type="submit">
+                        <x-icons.icon-trash class="mr-1 h-5 w-5" />
+                        削除
+                    </button>
+                </form>
+            @endif
         </div>
     </div>
     </{{ $isLink ? 'a' : 'div' }}>
