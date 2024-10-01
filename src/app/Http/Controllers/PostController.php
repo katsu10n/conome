@@ -5,20 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index(Request $request)
+    public function index($category = null)
     {
-        $categoryId = $request->query('category');
-
         $postsQuery = Post::with(['user', 'category'])
             ->orderBy('created_at', 'desc');
 
-        if ($categoryId) {
-            $postsQuery->where('category_id', $categoryId);
+        if ($category) {
+            $postsQuery->where('category_id', $category);
         }
 
         $posts = $postsQuery->get()->map(function ($post) {
