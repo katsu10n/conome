@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,14 +15,7 @@ class PostController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $categories = Category::all();
-
-        return view('pages.posts.index', compact('posts', 'categories'));
-    }
-
-    public function create()
-    {
-        //
+        return view('pages.posts.index', compact('posts'));
     }
 
     public function store(StorePostRequest $request)
@@ -41,25 +33,16 @@ class PostController extends Controller
         return view('pages.posts.show', compact('post'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Post $post)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatePostRequest $request, Post $post)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Post $post)
     {
         //
