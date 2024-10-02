@@ -15,12 +15,12 @@ class ProfileController extends Controller
     public function show($uid)
     {
         $user = User::where('uid', $uid)->firstOrFail();
-        return view('profile.show', ['user' => $user]);
+        return view('pages.profile.show', ['user' => $user]);
     }
 
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        return view('pages.profile.edit', [
             'user' => $request->user(),
         ]);
     }
@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('pages.profile.edit')->with('status', 'profile-updated');
     }
 
     public function destroy(Request $request): RedirectResponse
