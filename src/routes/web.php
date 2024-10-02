@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
@@ -21,6 +22,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('posts', PostController::class)->only(['index', 'show', 'store', 'destroy']);
     Route::get('posts/category/{category?}', [PostController::class, 'index'])->name('posts.category');
+
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
     Route::post('/categories/{category}/favorite', [FavoriteController::class, 'toggle'])->name('categories.favorite');
     Route::post('/posts/{post}/like', [LikeController::class, 'toggle'])->name('posts.like');

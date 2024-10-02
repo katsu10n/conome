@@ -42,6 +42,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $currentUserId = Auth::id();
+        $post->load('comments.user');
 
         return view('pages.posts.show', compact('post', 'currentUserId'));
     }
