@@ -23,8 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::get('posts/category/{category?}', [PostController::class, 'index'])->name('posts.category');
 
     Route::post('/categories/{category}/favorite', [FavoriteController::class, 'toggle'])->name('categories.favorite');
-
-    Route::post('/posts/{post}/like', [LikeController::class, 'store'])->name('posts.like');
-    Route::delete('/posts/{post}/like', [LikeController::class, 'destroy'])->name('posts.unlike');
+    Route::post('/posts/{post}/like', [LikeController::class, 'toggle'])->name('posts.like');
 });
 require __DIR__ . '/auth.php';

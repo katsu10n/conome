@@ -32,35 +32,26 @@
                 <span>5</span>
             </div>
             <div class="mr-8 flex items-center">
-                @if ($post->isLikedBy(Auth::user()))
-                    <form class="mr-2" action="{{ route('posts.unlike', $post) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="flex items-center text-red-500 hover:text-red-600" type="submit">
-                            <x-icons.icon-heart class="h-6 w-6 fill-current" />
-                        </button>
-                    </form>
-                @else
-                    <form class="mr-2" action="{{ route('posts.like', $post) }}" method="POST">
-                        @csrf
-                        <button class="flex items-center text-gray-400 hover:text-red-500" type="submit">
-                            <x-icons.icon-heart class="h-6 w-6" />
-                        </button>
-                    </form>
-                @endif
-                <span class="text-sm">{{ $post->likes->count() }}</span>
+                <button
+                    class="like-button {{ $post->isLikedBy(Auth::user()) ? 'text-red-500 hover:text-red-600' : 'text-gray-400 hover:text-red-500' }} mr-2 flex items-center"
+                    data-post-id="{{ $post->id }}"
+                    data-liked="{{ $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}" type="button">
+                    <x-icons.icon-heart class="{{ $post->isLikedBy(Auth::user()) ? 'fill-current' : '' }} h-6 w-6" />
+                </button>
+                <span class="like-count text-sm" data-post-id="{{ $post->id }}">{{ $post->likes->count() }}</span>
             </div>
-            @if ($post->user_id === $currentUserId)
-                <form class="flex items-center" action="{{ route('posts.destroy', $post) }}" method="POST"
-                    onsubmit="return confirm('本当に削除しますか？');">
-                    @csrf
-                    @method('DELETE')
-                    <button class="flex items-center text-red-600 hover:text-red-800" type="submit">
-                        <x-icons.icon-trash class="mr-1 h-5 w-5" />
-                        削除
-                    </button>
-                </form>
-            @endif
         </div>
+
+        @if ($post->user_id === $currentUserId)
+            <form class="flex items-center" action="{{ route('posts.destroy', $post) }}" method="POST"
+                onsubmit="return confirm('本当に削除しますか？');">
+                @csrf
+                @method('DELETE')
+                <button class="flex items-center text-red-600 hover:text-red-800" type="submit">
+                    <x-icons.icon-trash class="mr-1 h-5 w-5" />
+                    削除
+                </button>
+            </form>
+        @endif
     </div>
     </{{ $isLink ? 'a' : 'div' }}>
