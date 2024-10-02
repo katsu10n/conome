@@ -1,7 +1,7 @@
 <nav>
     <ul>
         <div class="border-b">
-            <x-nav-link href="">
+            <x-nav-link :href="route('profile.show', Auth::user()->uid)">
                 プロフィール
             </x-nav-link>
             <x-nav-link href="">

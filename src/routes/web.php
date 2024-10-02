@@ -24,5 +24,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/categories/{category}/favorite', [FavoriteController::class, 'toggle'])->name('categories.favorite');
     Route::post('/posts/{post}/like', [LikeController::class, 'toggle'])->name('posts.like');
+
+    Route::get('/{uid}', [ProfileController::class, 'show'])->name('profile.show');
 });
 require __DIR__ . '/auth.php';
