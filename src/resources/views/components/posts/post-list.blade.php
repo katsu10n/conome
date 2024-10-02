@@ -40,18 +40,19 @@
                 </button>
                 <span class="like-count text-sm" data-post-id="{{ $post->id }}">{{ $post->likes->count() }}</span>
             </div>
+            <div class="mr-8 flex items-center">
+                @if ($post->user_id === $currentUserId)
+                    <form class="flex items-center" action="{{ route('posts.destroy', $post) }}" method="POST"
+                        onsubmit="return confirm('本当に削除しますか？');">
+                        @csrf
+                        @method('DELETE')
+                        <button class="flex items-center text-red-600 hover:text-red-800" type="submit">
+                            <x-icons.icon-trash class="mr-1 h-5 w-5" />
+                            削除
+                        </button>
+                    </form>
+                @endif
+            </div>
         </div>
-
-        @if ($post->user_id === $currentUserId)
-            <form class="flex items-center" action="{{ route('posts.destroy', $post) }}" method="POST"
-                onsubmit="return confirm('本当に削除しますか？');">
-                @csrf
-                @method('DELETE')
-                <button class="flex items-center text-red-600 hover:text-red-800" type="submit">
-                    <x-icons.icon-trash class="mr-1 h-5 w-5" />
-                    削除
-                </button>
-            </form>
-        @endif
     </div>
     </{{ $isLink ? 'a' : 'div' }}>
