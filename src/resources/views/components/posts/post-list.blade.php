@@ -32,8 +32,23 @@
                 <span>5</span>
             </div>
             <div class="mr-8 flex items-center">
-                <x-icons.icon-heart class="mr-1 h-4 w-4" />
-                <span>10</span>
+                @if ($post->isLikedBy(Auth::user()))
+                    <form class="mr-2" action="{{ route('posts.unlike', $post) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="flex items-center text-red-500 hover:text-red-600" type="submit">
+                            <x-icons.icon-heart class="h-6 w-6 fill-current" />
+                        </button>
+                    </form>
+                @else
+                    <form class="mr-2" action="{{ route('posts.like', $post) }}" method="POST">
+                        @csrf
+                        <button class="flex items-center text-gray-400 hover:text-red-500" type="submit">
+                            <x-icons.icon-heart class="h-6 w-6" />
+                        </button>
+                    </form>
+                @endif
+                <span class="text-sm">{{ $post->likes->count() }}</span>
             </div>
             @if ($post->user_id === $currentUserId)
                 <form class="flex items-center" action="{{ route('posts.destroy', $post) }}" method="POST"
