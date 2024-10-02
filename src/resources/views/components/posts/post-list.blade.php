@@ -33,7 +33,7 @@
         <div class="col-span-2 flex gap-2">
             <div class="mr-8 flex items-center">
                 <x-icons.icon-comment class="mr-1 h-4 w-4" />
-                <span>5</span>
+                <span>{{ $post->comments->count() }}</span>
             </div>
             <div class="mr-8 flex items-center">
                 <button
