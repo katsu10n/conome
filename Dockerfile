@@ -17,6 +17,18 @@ WORKDIR /var/www/html
 # srcディレクトリの内容をコピー
 COPY src /var/www/html
 
+# Node.jsとnpmのインストール
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get update \
+    && apt-get install -y nodejs \
+    && npm install -g npm@latest
+
+# 依存関係のインストール
+RUN npm ci
+
+# ビルド
+RUN npm run production
+
 # Composerの依存関係インストール
 RUN composer install --no-dev --optimize-autoloader
 
@@ -41,15 +53,3 @@ RUN chmod +x /start.sh
 
 # コマンドを変更
 CMD ["/start.sh"]
-
-# Node.jsとnpmのインストール
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get update \
-    && apt-get install -y nodejs \
-    && npm install -g npm@latest
-
-# 依存関係のインストール
-RUN npm ci
-
-# ビルド
-RUN npm run production
