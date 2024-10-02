@@ -17,7 +17,6 @@
                 <a class="user-link font-semibold hover:underline" href="{{ route('profile.show', $post->user->uid) }}">
                     {{ $post->user->name }}
                 </a>
-                <p class="text-gray-500">○時間前</p>
             </div>
             <p class="ml-auto text-green-700">{{ $post->category->name }}</p>
         </div>
@@ -30,7 +29,7 @@
         </div>
     </div>
     <div class="mt-2">
-        <div class="col-span-2 flex gap-2">
+        <div class="col-span-2 flex justify-between gap-2">
             <div class="mr-8 flex items-center">
                 <x-icons.icon-comment class="mr-1 h-4 w-4" />
                 <span>{{ $post->comments->count() }}</span>
@@ -57,6 +56,8 @@
                     </form>
                 </div>
             @endif
+
+            <p class="text-gray-500">{{ $post->created_at->format('Y年n月j日 H:i') }}</p>
         </div>
     </div>
 </div>
