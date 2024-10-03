@@ -11,17 +11,18 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         DB::table('categories')->insert([
-            ['name' => 'エンタメ'],
-            ['name' => 'アート・デザイン'],
-            ['name' => 'テクノロジー・ガジェット'],
-            ['name' => '趣味・クラフト'],
-            ['name' => 'スポーツ・フィットネス'],
-            ['name' => '旅行・冒険'],
-            ['name' => 'ファッション・ビューティー'],
-            ['name' => 'フード・ドリンク'],
-            ['name' => 'ペット・動物'],
-            ['name' => '学習・教育'],
-            ['name' => 'その他'],
+            ['name' => 'エンタメ', 'slug' => 'entertainment'],
+            ['name' => 'ビジネス', 'slug' => 'business'],
+            ['name' => 'アート・デザイン', 'slug' => 'art-design'],
+            ['name' => 'テクノロジー・ガジェット', 'slug' => 'technology-gadget'],
+            ['name' => '趣味・クラフト', 'slug' => 'hobby-craft'],
+            ['name' => 'スポーツ・フィットネス', 'slug' => 'sports-fitness'],
+            ['name' => '旅行・冒険', 'slug' => 'travel-adventure'],
+            ['name' => 'ファッション・ビューティー', 'slug' => 'fashion-beauty'],
+            ['name' => 'フード・ドリンク', 'slug' => 'food-drink'],
+            ['name' => 'ペット・動物', 'slug' => 'pet-animal'],
+            ['name' => '学習・教育', 'slug' => 'learning-education'],
+            ['name' => 'その他', 'slug' => 'other'],
         ]);
     }
 }

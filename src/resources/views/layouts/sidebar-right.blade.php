@@ -1,43 +1,17 @@
-<nav>
-    <ul>
-        <li>
-            <h2>人気の投稿</h2>
-        </li>
-        <x-nav-link href="">
-            投稿1
-        </x-nav-link>
-        <x-nav-link href="">
-            投稿2
-        </x-nav-link>
-        <x-nav-link href="">
-            投稿3
-        </x-nav-link>
-        <x-nav-link href="">
-            投稿4
-        </x-nav-link>
-        <x-nav-link href="">
-            投稿5
-        </x-nav-link>
-    </ul>
+<div class="mb-24">
+    <h2 class="mb-4 text-lg font-semibold">人気の投稿</h2>
 
-    <ul>
-        <li>
-            <h2>人気のカテゴリー</h2>
-        </li>
-        <x-nav-link href="">
-            カテゴリー1
-        </x-nav-link>
-        <x-nav-link href="">
-            カテゴリー2
-        </x-nav-link>
-        <x-nav-link href="">
-            カテゴリー3
-        </x-nav-link>
-        <x-nav-link href="">
-            カテゴリー4
-        </x-nav-link>
-        <x-nav-link href="">
-            カテゴリー5
-        </x-nav-link>
-    </ul>
-</nav>
+    <div class="mb-6">
+        <h3 class="text-md mb-2 font-semibold">直近7日間</h3>
+        @foreach ($popularPosts['recent'] as $post)
+            <x-posts.post-item-simple :post="$post" />
+        @endforeach
+    </div>
+
+    <div>
+        <h3 class="text-md mb-2 font-semibold">累計</h3>
+        @foreach ($popularPosts['allTime'] as $post)
+            <x-posts.post-item-simple :post="$post" />
+        @endforeach
+    </div>
+</div>

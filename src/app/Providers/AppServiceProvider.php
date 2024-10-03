@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -36,6 +37,11 @@ class AppServiceProvider extends ServiceProvider
             });
 
             $view->with('categories', $categories);
+        });
+
+        View::composer('layouts.sidebar-right', function ($view) {
+            $popularPosts = app(PostController::class)->getPopularPosts();
+            $view->with('popularPosts', $popularPosts);
         });
     }
 }

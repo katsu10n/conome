@@ -12,6 +12,7 @@ return new class extends Migration
             $table->integer('id')->primary()->autoIncrement();
 
             $table->text('name');
+            $table->text('slug')->unique()->index();
             $table->timestampsTz();
         });
     }

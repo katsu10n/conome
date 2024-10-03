@@ -1,5 +1,7 @@
 FROM php:8.3-fpm
 
+WORKDIR /var/www/html
+
 RUN apt-get update && apt-get install -y \
     git \
     zip \
@@ -12,43 +14,32 @@ RUN docker-php-ext-install zip pdo pdo_pgsql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /var/www/html
-
-# srcディレクトリの内容をコピー
-COPY src /var/www/html
-
 # Node.jsとnpmのインストール
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get update \
     && apt-get install -y nodejs \
     && npm install -g npm@latest
 
-# 依存関係のインストール
-RUN npm ci
-
-# ビルド
-RUN npm run production
-
-# Composerの依存関係インストール
-RUN composer install --no-dev --optimize-autoloader
-
 # Nginxの設定
 COPY nginx.conf /etc/nginx/nginx.conf
-
-# 権限の設定
-RUN chown -R www-data:www-data /var/www/html
 
 # 環境変数の設定
 ENV PORT=8080
 
-# 起動スクリプトの作成
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
+# ソースコードのコピー
+COPY src /var/www/html
 
-# start.shをコピー
-COPY start.sh /start.sh
+# Composerの依存関係インストール
+RUN composer install --no-dev --optimize-autoloader
 
-# 実行権限を付与
+# npmの依存関係インストールとビルド
+RUN npm ci && npm run build
+
+# 権限の設定
+RUN chown -R www-data:www-data /var/www/html
+
+# 起動スクリプトのコピーと権限設定
+COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 # コマンドを変更

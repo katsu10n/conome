@@ -6,7 +6,6 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
@@ -42,6 +41,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $currentUserId = Auth::id();
+        $post->load('comments.user');
 
         return view('pages.posts.show', compact('post', 'currentUserId'));
     }
@@ -65,5 +65,47 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('posts.index');
+    }
+
+    public function indexFollowed($category = null)
+    {
+        $currentUserId = Auth::id();
+        $followedUserIds = Auth::user()->following()->pluck('users.id');
+
+        $postsQuery = Post::with(['user', 'category'])
+            ->whereIn('user_id', $followedUserIds)
+            ->orderBy('created_at', 'desc');
+
+        if ($category) {
+            $postsQuery->where('category_id', $category);
+        }
+
+        $posts = $postsQuery->get()->map(function ($post) {
+            $post->created_at_for_humans = $post->created_at->diffForHumans();
+            return $post;
+        });
+
+        $isFollowedPosts = true;
+
+        return view('pages.posts.index', compact('posts', 'currentUserId', 'isFollowedPosts'));
+    }
+
+    public function getPopularPosts()
+    {
+        $recentPopular = Post::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->where('created_at', '>=', now()->subDays(7))
+            ->take(5)
+            ->get();
+
+        $allTimePopular = Post::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->take(5)
+            ->get();
+
+        return [
+            'recent' => $recentPopular,
+            'allTime' => $allTimePopular
+        ];
     }
 }
