@@ -14,6 +14,10 @@
             </div>
         </div>
 
+        @if (Auth::id() !== $user->id)
+            <x-users.user-follow-button :user="$user" />
+        @endif
+
         <x-users.user-follow-modal title="フォロワー" open="followerModalOpen">
             <x-slot name="content">
                 <div class="space-y-4">
