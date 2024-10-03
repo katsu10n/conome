@@ -5,7 +5,7 @@
                 プロフィール
             </x-nav-link>
             <x-nav-link href="">
-                通知
+                通知（未実装）
             </x-nav-link>
         </div>
         <x-nav-link href="{{ route('posts.index') }}" :active="!request()->route('category')">

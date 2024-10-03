@@ -23,7 +23,20 @@
                 <h1 class="py-4 text-lg font-bold"><a href="">Conome</a></h1>
                 <x-user-nav-modal />
             </div>
-            <x-posts.post-header />
+            <nav class="text-center text-sm font-medium text-gray-500">
+                @if (request()->routeIs('posts.index') ||
+                        request()->routeIs('posts.category') ||
+                        request()->routeIs('posts.followed') ||
+                        request()->routeIs('posts.category.followed'))
+                    <x-posts.post-header />
+                @else
+                    <ul class="-mb-px flex border-b border-gray-200">
+                        <li class="flex-1">
+                            <x-header-nav-back />
+                        </li>
+                    </ul>
+                @endif
+            </nav>
             <div class="flex items-center">
                 <input class="rounded-full px-4 py-2" type="text" placeholder="検索（未実装）" />
             </div>
