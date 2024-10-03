@@ -60,10 +60,14 @@ class User extends Authenticatable
         return $this->hasMany(Favorite::class);
     }
 
-
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
     }
 
     public function following()
@@ -71,8 +75,8 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
     }
 
-    public function followers()
+    public function isFollowing(User $user)
     {
-        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
+        return $this->following()->where('followed_id', $user->id)->exists();
     }
 }
