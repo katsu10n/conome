@@ -1,4 +1,4 @@
-<nav>
+<nav class="mb-8">
     <ul>
         <div class="border-b">
             <x-nav-link :href="route('profile.show', Auth::user()->uid)">

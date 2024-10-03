@@ -17,7 +17,7 @@
 </head>
 
 <body class="min-h-dvh bg-white font-sans antialiased">
-    <div class="relative mx-auto max-w-screen-lg" id="container">
+    <div class="relative mx-auto mb-16 max-w-screen-lg" id="container">
         <header class="sticky top-0 z-20 grid grid-cols-[15rem_1fr_15rem] gap-8 bg-white" id="main-header">
             <div class="flex justify-between">
                 <h1 class="py-4 text-lg font-bold"><a href="">Conome</a></h1>
