@@ -89,4 +89,23 @@ class PostController extends Controller
 
         return view('pages.posts.index', compact('posts', 'currentUserId', 'isFollowedPosts'));
     }
+
+    public function getPopularPosts()
+    {
+        $recentPopular = Post::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->where('created_at', '>=', now()->subDays(7))
+            ->take(5)
+            ->get();
+
+        $allTimePopular = Post::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->take(5)
+            ->get();
+
+        return [
+            'recent' => $recentPopular,
+            'allTime' => $allTimePopular
+        ];
+    }
 }
