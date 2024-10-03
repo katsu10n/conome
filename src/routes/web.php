@@ -24,6 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('posts', PostController::class)->only(['index', 'show', 'store', 'destroy']);
     Route::get('posts/category/{category?}', [PostController::class, 'index'])->name('posts.category');
 
+    Route::get('posts/sorted/follow', [PostController::class, 'indexFollowed'])->name('posts.followed');
+    Route::get('posts/category/{category}/follow', [PostController::class, 'indexFollowed'])->name('posts.category.followed');
+
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 

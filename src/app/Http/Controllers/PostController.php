@@ -6,7 +6,6 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
 {
@@ -66,5 +65,28 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('posts.index');
+    }
+
+    public function indexFollowed($category = null)
+    {
+        $currentUserId = Auth::id();
+        $followedUserIds = Auth::user()->following()->pluck('users.id');
+
+        $postsQuery = Post::with(['user', 'category'])
+            ->whereIn('user_id', $followedUserIds)
+            ->orderBy('created_at', 'desc');
+
+        if ($category) {
+            $postsQuery->where('category_id', $category);
+        }
+
+        $posts = $postsQuery->get()->map(function ($post) {
+            $post->created_at_for_humans = $post->created_at->diffForHumans();
+            return $post;
+        });
+
+        $isFollowedPosts = true;
+
+        return view('pages.posts.index', compact('posts', 'currentUserId', 'isFollowedPosts'));
     }
 }
