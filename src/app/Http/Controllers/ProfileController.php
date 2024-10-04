@@ -15,7 +15,8 @@ class ProfileController extends Controller
     public function show($uid)
     {
         $user = User::where('uid', $uid)->firstOrFail();
-        return view('pages.profile.show', ['user' => $user]);
+        $posts = $user->posts()->with(['user', 'category', 'comments', 'likes'])->latest()->get();
+        return view('pages.profile.show', compact('user', 'posts'));
     }
 
     public function edit(Request $request): View
@@ -54,5 +55,27 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function comments($uid)
+    {
+        $user = User::where('uid', $uid)->firstOrFail();
+        $posts = $user->comments()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
+            ->latest()
+            ->get()
+            ->pluck('post')
+            ->unique();
+        return view('pages.profile.show', compact('user', 'posts'));
+    }
+
+    public function likes($uid)
+    {
+        $user = User::where('uid', $uid)->firstOrFail();
+        $posts = $user->likes()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
+            ->latest()
+            ->get()
+            ->pluck('post')
+            ->unique();
+        return view('pages.profile.show', compact('user', 'posts'));
     }
 }

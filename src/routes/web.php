@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/like', [LikeController::class, 'toggle'])->name('posts.like');
 
     Route::get('/{uid}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/{uid}/comments', [ProfileController::class, 'comments'])->name('profile.comments');
+    Route::get('/{uid}/likes', [ProfileController::class, 'likes'])->name('profile.likes');
 
     Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
     Route::delete('/unfollow/{user}', [FollowController::class, 'unfollow'])->name('unfollow');

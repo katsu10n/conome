@@ -4,5 +4,7 @@
         <x-users.user-list-modal title="フォロー中" :users="$user->following" :isFollowerModal="false" open="followingModalOpen" />
 
         <x-users.user-profile-card :user="$user" />
+        <x-users.user-profile-tab :user="$user" />
+        <x-users.user-profile-tab-content :posts="$posts" />
     </div>
 </x-app-layout>
