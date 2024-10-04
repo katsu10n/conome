@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['layouts.sidebar-left', 'components.posts.post-form'], function ($view) {
             $categories = Cache::remember('sidebar_categories_' . Auth::id(), now()->addHours(24), function () {
-                return Category::select('id', 'name')
+                return Category::select('id', 'name', 'slug')
                     ->withCount(['favorites' => function ($query) {
                         $query->where('user_id', Auth::id());
                     }])

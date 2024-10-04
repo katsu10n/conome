@@ -14,9 +14,10 @@
         @foreach ($categories as $category)
             <x-nav-link class="group flex w-full items-center justify-between"
                 href="{{ request()->routeIs('posts.followed') || request()->routeIs('posts.category.followed')
-                    ? route('posts.category.followed', $category->id)
-                    : route('posts.category', $category->id) }}"
-                :active="!request()->routeIs('profile.show') && request()->route('category') == $category->id">
+                    ? route('posts.category.followed', $category->slug)
+                    : route('posts.category', $category->slug) }}"
+                :active="!request()->routeIs('profile.show') &&
+                    (request()->route('category') && request()->route('category')->slug == $category->slug)">
                 <span>{{ $category->name }}</span>
                 @auth
                     <button class="favorite-btn ml-2 text-gray-400 transition-colors duration-200 hover:text-yellow-400"
