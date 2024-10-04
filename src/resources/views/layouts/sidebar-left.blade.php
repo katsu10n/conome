@@ -1,14 +1,14 @@
 <nav class="mb-8">
     <ul>
         <div class="border-b">
-            <x-nav-link :href="route('profile.show', Auth::user()->uid)">
+            <x-nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.show') && request()->route('uid') == Auth::user()->uid">
                 プロフィール
             </x-nav-link>
-            <x-nav-link href="">
+            <x-nav-link href="" :active="false">
                 通知（未実装）
             </x-nav-link>
         </div>
-        <x-nav-link href="{{ route('posts.index') }}" :active="!request()->route('category')">
+        <x-nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.show') && !request()->route('category')">
             すべて
         </x-nav-link>
         @foreach ($categories as $category)
@@ -16,7 +16,7 @@
                 href="{{ request()->routeIs('posts.followed') || request()->routeIs('posts.category.followed')
                     ? route('posts.category.followed', $category->id)
                     : route('posts.category', $category->id) }}"
-                :active="request()->route('category') == $category->id">
+                :active="!request()->routeIs('profile.show') && request()->route('category') == $category->id">
                 <span>{{ $category->name }}</span>
                 @auth
                     <button class="favorite-btn ml-2 text-gray-400 transition-colors duration-200 hover:text-yellow-400"
