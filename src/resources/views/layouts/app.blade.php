@@ -30,11 +30,9 @@
                         request()->routeIs('posts.category.followed'))
                     <x-posts.post-header />
                 @else
-                    <ul class="-mb-px flex border-b border-gray-200">
-                        <li class="flex-1">
-                            <x-header-nav-back />
-                        </li>
-                    </ul>
+                    <div class="flex items-center gap-2 border-b border-gray-200 text-left">
+                        {{ $backButton ?? '' }}
+                    </div>
                 @endif
             </nav>
             <div class="flex items-center">

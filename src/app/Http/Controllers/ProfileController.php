@@ -14,7 +14,7 @@ class ProfileController extends Controller
 {
     public function show($uid)
     {
-        $user = User::where('uid', $uid)->firstOrFail();
+        $user = User::where('uid', $uid)->withCount('posts')->firstOrFail();
         $posts = $user->posts()->with(['user', 'category', 'comments', 'likes'])->latest()->get();
         return view('pages.profile.show', compact('user', 'posts'));
     }
@@ -59,7 +59,7 @@ class ProfileController extends Controller
 
     public function comments($uid)
     {
-        $user = User::where('uid', $uid)->firstOrFail();
+        $user = User::where('uid', $uid)->withCount(['comments'])->firstOrFail();
         $posts = $user->comments()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
             ->latest()
             ->get()
@@ -70,7 +70,7 @@ class ProfileController extends Controller
 
     public function likes($uid)
     {
-        $user = User::where('uid', $uid)->firstOrFail();
+        $user = User::where('uid', $uid)->withCount(['likes'])->firstOrFail();
         $posts = $user->likes()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
             ->latest()
             ->get()
