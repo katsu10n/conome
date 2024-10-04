@@ -1,23 +1,28 @@
 <nav class="mb-8">
     <ul>
         <div class="border-b">
-            <x-nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.show') && request()->route('uid') == Auth::user()->uid">
+            <x-nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
                 プロフィール
             </x-nav-link>
             <x-nav-link href="" :active="false">
                 通知（未実装）
             </x-nav-link>
         </div>
-        <x-nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.show') && !request()->route('category')">
+        <x-nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') && !request()->route('category')">
             すべて
         </x-nav-link>
         @foreach ($categories as $category)
+            @php
+                $isCategoryActive =
+                    !request()->routeIs('profile.*') &&
+                    request()->route('category') &&
+                    request()->route('category')->slug === $category->slug;
+            @endphp
             <x-nav-link class="group flex w-full items-center justify-between"
                 href="{{ request()->routeIs('posts.followed') || request()->routeIs('posts.category.followed')
                     ? route('posts.category.followed', $category->slug)
                     : route('posts.category', $category->slug) }}"
-                :active="!request()->routeIs('profile.show') &&
-                    (request()->route('category') && request()->route('category')->slug == $category->slug)">
+                :active="$isCategoryActive">
                 <span>{{ $category->name }}</span>
                 @auth
                     <button class="favorite-btn ml-2 text-gray-400 transition-colors duration-200 hover:text-yellow-400"
