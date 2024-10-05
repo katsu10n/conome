@@ -16,9 +16,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-dvh bg-white font-sans antialiased">
+<body class="min-h-dvh bg-bc font-sans antialiased">
     <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
-        <header class="sticky top-0 z-20 grid grid-cols-[18rem_minmax(0,1fr)_20rem] gap-8 bg-white" id="main-header">
+        <header class="sticky top-0 z-20 grid grid-cols-[18rem_minmax(0,1fr)_20rem] gap-8 bg-bc" id="main-header">
             <div class="flex items-center justify-between">
                 <h1 class="py-4 text-lg font-bold"><a href="/">Conome</a></h1>
                 <x-users.user-nav-modal />
@@ -36,7 +36,7 @@
                 @endif
             </nav>
             <div class="flex items-center">
-                <input class="w-full rounded-full px-4 py-2" type="text" placeholder="検索（未実装）" />
+                <input class="w-full rounded-full bg-bc px-4 py-2" type="text" placeholder="検索（未実装）" />
             </div>
         </header>
 

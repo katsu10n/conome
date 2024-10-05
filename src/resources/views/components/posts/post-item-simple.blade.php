@@ -5,8 +5,7 @@
         </a>
     </p>
     <p>
-        <a class="text-blue-600 hover:underline"
-            href="{{ route('posts.show', ['uid' => $post->user->uid, 'post' => $post]) }}">
+        <a class="hover:underline" href="{{ route('posts.show', ['uid' => $post->user->uid, 'post' => $post]) }}">
             {{ Str::limit($post->title, 30) }}
         </a>
     </p>

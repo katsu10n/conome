@@ -19,7 +19,7 @@
                     {{ $post->user->name }}
                 </a>
             </div>
-            <p class="ml-auto whitespace-nowrap text-green-700">{{ $post->category->name }}</p>
+            <p class="ml-auto whitespace-nowrap text-sub">{{ $post->category->name }}</p>
         </div>
         <div class="min-w-0">
             <a class="user-link hover:underline" href="{{ route('profile.show', $post->user->uid) }}">
