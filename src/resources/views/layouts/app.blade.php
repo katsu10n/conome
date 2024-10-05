@@ -58,6 +58,14 @@
     <div class="fixed bottom-4 z-50 w-52" id="modal-container">
         <x-posts.post-form-modal />
     </div>
+
+    @if (old('scroll_to'))
+        <script>
+            window.onload = function() {
+                window.scrollTo(0, {{ old('scroll_to') }});
+            }
+        </script>
+    @endif
 </body>
 
 </html>
