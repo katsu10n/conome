@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('profile.show', $user->uid)->with('status', 'profile-updated');
+        return view('pages.profile.edit', compact('user'));
     }
 
     public function destroy(Request $request): RedirectResponse
