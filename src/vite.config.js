@@ -19,10 +19,6 @@ export default defineConfig({
     },
   },
 
-  build: {
-    sourcemap: false,
-  },
-
   plugins: [
     laravel({
       input: ['resources/css/app.css', 'resources/js/app.js'],
