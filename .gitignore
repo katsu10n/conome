@@ -1,3 +1,4 @@
 postgres-data/
 pgadmin-data/
+.vite-cache/
 _material/
