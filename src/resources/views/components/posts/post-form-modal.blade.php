@@ -9,4 +9,3 @@
         <x-posts.post-form />
     </x-common.modal-card>
 </div>
-/

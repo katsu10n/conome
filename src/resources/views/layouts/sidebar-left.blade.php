@@ -1,20 +1,20 @@
 <nav class="mb-8">
     <ul>
-        <div class="border-b">
-            <x-nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
+        <div class="border-b-2 border-slate-200">
+            <x-common.nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
                 <x-icons.icon-person />
                 プロフィール
-            </x-nav-link>
-            <x-nav-link>
+            </x-common.nav-link>
+            <x-common.nav-link>
                 <x-icons.icon-notice />
                 通知（未実装）
-            </x-nav-link>
+            </x-common.nav-link>
         </div>
-        <x-nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') &&
+        <x-common.nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') &&
             !request()->route('category') &&
             !request()->routeIs('posts.show')">
             すべて
-        </x-nav-link>
+        </x-common.nav-link>
         @foreach ($categories as $category)
             @php
                 $isCategoryActive =
@@ -23,7 +23,7 @@
                     request()->route('category') &&
                     request()->route('category')->slug === $category->slug;
             @endphp
-            <x-nav-link class="group justify-between"
+            <x-common.nav-link class="group justify-between"
                 href="{{ request()->routeIs('posts.followed') || request()->routeIs('posts.category.followed')
                     ? route('posts.category.followed', $category->slug)
                     : route('posts.category', $category->slug) }}"
@@ -33,14 +33,14 @@
                     @csrf
                     <input name="scroll_position" type="hidden" value="">
                     <button
-                        class="favorite-btn ml-2 flex items-center justify-center text-gray-400 transition-colors duration-200 hover:text-main"
+                        class="favorite-btn ml-2 flex items-center justify-center text-gray-400 transition-all hover:text-main"
                         type="submit" onclick="this.form.elements.scroll_position.value = window.pageYOffset;">
                         <x-icons.icon-star
-                            class="{{ $category->is_favorited ? 'text-main' : 'opacity-0 group-hover:opacity-100' }}"
+                            class="{{ $category->is_favorited ? 'text-mainLight hover:opacity-70' : 'opacity-0 group-hover:opacity-100' }} transition-all"
                             :fill="$category->is_favorited" />
                     </button>
                 </form>
-            </x-nav-link>
+            </x-common.nav-link>
         @endforeach
     </ul>
 </nav>
