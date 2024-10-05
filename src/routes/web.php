@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('posts', PostController::class)->only(['index', 'show', 'store', 'destroy']);
-    Route::get('posts/category/{category:slug}', [PostController::class, 'index'])->name('posts.category');
+    Route::get('posts/categories/{category:slug}', [PostController::class, 'index'])->name('posts.category');
 
     Route::get('posts/sorted/follow', [PostController::class, 'indexFollowed'])->name('posts.followed');
     Route::get('posts/category/{category:slug}/follow', [PostController::class, 'indexFollowed'])->name('posts.category.followed');
