@@ -1,11 +1,11 @@
-<!-- Settings Dropdown -->
 <div class="hidden sm:flex sm:items-center">
-    <x-dropdown align="right" width="w-48">
+    <x-common.dropdown align="right" width="w-48">
         <x-slot name="trigger">
             <button
-                class="inline-flex items-center gap-2 text-sm transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
+                class="inline-flex items-center gap-2 text-sm transition duration-150 ease-in-out hover:text-textLight focus:outline-none">
+
                 <x-icons.icon-user class="h-6 w-6" />
-                <p class="max-w-32 truncate">{{ Auth::user()->name ?? 'ゲスト' }}</p>
+                <p class="max-w-36 truncate">{{ Auth::user()->name ?? 'ゲスト' }}</p>
 
                 <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
@@ -16,23 +16,24 @@
         </x-slot>
 
         <x-slot name="content">
-            <x-dropdown-link :href="route('profile.edit')">
+            <x-common.dropdown-link :href="route('profile.edit')">
                 <x-icons.icon-setting />
                 {{ __('設定') }}
-            </x-dropdown-link>
+            </x-common.dropdown-link>
 
-            <x-dropdown-link>
+            <x-common.dropdown-link>
                 <x-icons.icon-other />
                 {{ __('ガイドとヘルプ（未）') }}
-            </x-dropdown-link>
+            </x-common.dropdown-link>
 
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                <x-common.dropdown-link :href="route('logout')"
+                    onclick="event.preventDefault(); this.closest('form').submit();">
                     <x-icons.icon-logout />
                     {{ __('ログアウト') }}
-                </x-dropdown-link>
+                </x-common.dropdown-link>
             </form>
         </x-slot>
-    </x-dropdown>
+    </x-common.dropdown>
 </div>
