@@ -22,5 +22,6 @@
             </button>
         </div>
     </div>
+    <input id="uid" name="uid" type="hidden" value="{{ $user->uid }}">
     <input id="email" name="email" type="hidden" value="{{ $user->email }}">
 </form>

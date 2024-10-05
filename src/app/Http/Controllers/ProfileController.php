@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return view('pages.profile.edit', compact('user'));
+        return redirect()->back();
     }
 
     public function destroy(Request $request): RedirectResponse
