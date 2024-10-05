@@ -5,7 +5,7 @@
                 <x-icons.icon-person />
                 プロフィール
             </x-nav-link>
-            <x-nav-link href="" :active="false">
+            <x-nav-link>
                 <x-icons.icon-notice />
                 通知（未実装）
             </x-nav-link>

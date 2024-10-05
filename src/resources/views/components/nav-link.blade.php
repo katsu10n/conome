@@ -1,4 +1,4 @@
-@props(['href', 'active' => false])
+@props(['href' => '', 'active' => false])
 
 <li>
     <a href="{{ $href }}"

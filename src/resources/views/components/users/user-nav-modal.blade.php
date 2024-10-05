@@ -1,6 +1,6 @@
 <!-- Settings Dropdown -->
 <div class="hidden sm:flex sm:items-center">
-    <x-dropdown align="right" width="w-56">
+    <x-dropdown align="right" width="w-48">
         <x-slot name="trigger">
             <button
                 class="inline-flex items-center gap-2 text-sm transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
@@ -17,23 +17,19 @@
 
         <x-slot name="content">
             <x-dropdown-link :href="route('profile.edit')">
-                {{ __('アカウント設定') }}
+                <x-icons.icon-setting />
+                {{ __('設定') }}
             </x-dropdown-link>
 
-            <x-dropdown-link href="">
-                {{ __('利用規約（未）') }}
-            </x-dropdown-link>
-
-            <x-dropdown-link href="">
-                {{ __('プライバシーポリシー（未）') }}
+            <x-dropdown-link>
+                <x-icons.icon-other />
+                {{ __('ガイドとヘルプ（未）') }}
             </x-dropdown-link>
 
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-
-                <x-dropdown-link :href="route('logout')"
-                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                    <x-icons.icon-logout />
                     {{ __('ログアウト') }}
                 </x-dropdown-link>
             </form>
