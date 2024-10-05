@@ -5,7 +5,7 @@
         投稿する
     </button>
 
-    <x-common.modal-card open="open">
+    <x-common.modal-card title="投稿を作成" open="open">
         <x-posts.post-form />
     </x-common.modal-card>
 </div>

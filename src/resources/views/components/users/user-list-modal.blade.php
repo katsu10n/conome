@@ -1,6 +1,6 @@
-@props(['users', 'isFollowerModal', 'open'])
+@props(['users', 'isFollowerModal', 'open', 'title'])
 
-<x-common.modal-card :open="$open">
+<x-common.modal-card :title="$title" :open="$open">
     <div class="space-y-4">
         @foreach ($users as $user)
             <div class="flex items-center justify-between">

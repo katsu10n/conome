@@ -16,7 +16,7 @@
             @else
                 <button class="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
                     @click="editModalOpen = true">
-                    プロフィール編集
+                    プロフィールを編集
                 </button>
             @endif
         </div>
@@ -25,7 +25,7 @@
         <p class="mt-2">{{ $user->content }}</p>
     </div>
     <div class="mb-3 mt-6 flex gap-14">
-        <div class="flex cursor-pointer flex-col items-center justify-center hover:text-gray-600"
+        <div class="flex cursor-pointer flex-col items-center justify-center hover:text-gray-600" title="フォロワー"
             @click="$dispatch('open-follower-modal')">
             <p class="text-navy-700 text-xl font-bold">
                 {{ $user->followers->count() }}
@@ -34,7 +34,7 @@
                 フォロワー
             </p>
         </div>
-        <div class="flex cursor-pointer flex-col items-center justify-center hover:text-gray-400"
+        <div class="flex cursor-pointer flex-col items-center justify-center hover:text-gray-400" title="フォロー中"
             @click="$dispatch('open-following-modal')">
             <p class="text-navy-700 text-xl font-bold">
                 {{ $user->following->count() }}
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <x-common.modal-card open="editModalOpen">
+    <x-common.modal-card title="プロフィールを編集" open="editModalOpen">
         <x-users.user-profile-edit-form :user="$user" />
     </x-common.modal-card>
 </div>
