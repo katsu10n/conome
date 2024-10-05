@@ -7,7 +7,7 @@
 @endphp
 
 <div class="{{ $baseClasses }} {{ $linkClasses }} post-container"
-    data-post-url="{{ $isLink ? route('posts.show', $post) : '' }}">
+    data-post-url="{{ $isLink ? route('posts.show', ['uid' => $post->user->uid, 'post' => $post]) : '' }}">
     <div class="row-span-2 mr-2">
         <x-icons.icon-user class="h-10 w-10 text-gray-400" />
     </div>

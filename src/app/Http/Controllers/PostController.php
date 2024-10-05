@@ -60,7 +60,7 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success', '投稿が作成されました。');
     }
 
-    public function show(Post $post)
+    public function show($uid, Post $post)
     {
         $currentUserId = Auth::id();
         $post->load('comments.user');
