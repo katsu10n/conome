@@ -16,9 +16,11 @@ export default {
       },
       colors: {
         bc: '#fff',
-        main: '#FF8343',
+        main: '#FBA834',
         mainLight: '#ffb793',
-        sub: '#179BAE',
+        sub: '#387ADF',
+        subLight: '#50C4ED',
+        text: '#333',
       },
     },
   },

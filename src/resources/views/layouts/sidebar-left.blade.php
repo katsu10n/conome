@@ -33,10 +33,10 @@
                     @csrf
                     <input name="scroll_position" type="hidden" value="">
                     <button
-                        class="favorite-btn ml-2 flex items-center justify-center text-gray-400 transition-colors duration-200 hover:text-amber-400"
+                        class="favorite-btn ml-2 flex items-center justify-center text-gray-400 transition-colors duration-200 hover:text-main"
                         type="submit" onclick="this.form.elements.scroll_position.value = window.pageYOffset;">
                         <x-icons.icon-star
-                            class="{{ $category->is_favorited ? 'text-amber-400' : 'opacity-0 group-hover:opacity-100' }}"
+                            class="{{ $category->is_favorited ? 'text-main' : 'opacity-0 group-hover:opacity-100' }}"
                             :fill="$category->is_favorited" />
                     </button>
                 </form>

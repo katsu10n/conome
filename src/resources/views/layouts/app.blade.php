@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-dvh bg-bc font-sans antialiased">
+<body class="min-h-dvh bg-bc font-sans text-text antialiased">
     <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
         <header class="sticky top-0 z-20 grid grid-cols-[18rem_minmax(0,1fr)_20rem] gap-8 bg-bc" id="main-header">
             <div class="flex items-center justify-between">
