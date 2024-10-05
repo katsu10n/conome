@@ -2,9 +2,11 @@
     <ul>
         <div class="border-b">
             <x-nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
+                <x-icons.icon-person />
                 プロフィール
             </x-nav-link>
             <x-nav-link href="" :active="false">
+                <x-icons.icon-notice />
                 通知（未実装）
             </x-nav-link>
         </div>

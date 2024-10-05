@@ -31,8 +31,8 @@
     </div>
     <div class="mt-2">
         <div class="col-span-2 flex justify-between gap-2">
-            <div class="mr-8 flex items-center">
-                <x-icons.icon-comment class="mr-1 h-4 w-4" />
+            <div class="mr-8 flex items-center gap-2">
+                <x-icons.icon-comment class="h-4 w-4" />
                 <span>{{ $post->comments->count() }}</span>
             </div>
             <div class="mr-8 flex items-center">
@@ -40,7 +40,7 @@
                     class="like-button {{ $post->isLikedBy(Auth::user()) ? 'text-red-500 hover:text-red-600' : 'text-gray-400 hover:text-red-500' }} mr-2 flex items-center"
                     data-post-id="{{ $post->id }}"
                     data-liked="{{ $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}" type="button">
-                    <x-icons.icon-heart class="{{ $post->isLikedBy(Auth::user()) ? 'fill-current' : '' }} h-6 w-6" />
+                    <x-icons.icon-heart class="{{ $post->isLikedBy(Auth::user()) ? 'fill-current' : '' }}" />
                 </button>
                 <span class="like-count text-sm" data-post-id="{{ $post->id }}">{{ $post->likes->count() }}</span>
             </div>
