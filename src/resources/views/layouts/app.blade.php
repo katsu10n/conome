@@ -17,8 +17,8 @@
 </head>
 
 <body class="min-h-dvh bg-white font-sans antialiased">
-    <div class="relative mx-auto mb-16 max-w-screen-lg" id="container">
-        <header class="sticky top-0 z-20 grid grid-cols-[15rem_1fr_15rem] gap-8 bg-white" id="main-header">
+    <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
+        <header class="sticky top-0 z-20 grid grid-cols-[16rem_1fr_20rem] gap-8 bg-white" id="main-header">
             <div class="flex justify-between">
                 <h1 class="py-4 text-lg font-bold"><a href="">Conome</a></h1>
                 <x-user-nav-modal />
@@ -36,11 +36,11 @@
                 @endif
             </nav>
             <div class="flex items-center">
-                <input class="rounded-full px-4 py-2" type="text" placeholder="検索（未実装）" />
+                <input class="w-full rounded-full px-4 py-2" type="text" placeholder="検索（未実装）" />
             </div>
         </header>
 
-        <div class="grid grid-cols-[15rem_1fr_15rem] gap-8">
+        <div class="grid grid-cols-[16rem_1fr_20rem] gap-8">
             <div class="max-h-dvh sidebar overflow-scroll">
                 @include('layouts.sidebar-left')
             </div>
