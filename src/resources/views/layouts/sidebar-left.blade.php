@@ -8,13 +8,16 @@
                 通知（未実装）
             </x-nav-link>
         </div>
-        <x-nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') && !request()->route('category')">
+        <x-nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') &&
+            !request()->route('category') &&
+            !request()->routeIs('posts.show')">
             すべて
         </x-nav-link>
         @foreach ($categories as $category)
             @php
                 $isCategoryActive =
                     !request()->routeIs('profile.*') &&
+                    !request()->routeIs('posts.show') &&
                     request()->route('category') &&
                     request()->route('category')->slug === $category->slug;
             @endphp
