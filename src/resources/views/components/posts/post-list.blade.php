@@ -11,20 +11,21 @@
     <div class="row-span-2 mr-2">
         <x-icons.icon-user class="h-10 w-10 text-gray-400" />
     </div>
-    <div class="flex flex-col">
+    <div class="flex min-w-0 flex-col">
         <div class="flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-                <a class="user-link font-semibold hover:underline" href="{{ route('profile.show', $post->user->uid) }}">
+            <div class="flex min-w-0 flex-1 items-center gap-2">
+                <a class="user-link truncate font-semibold hover:underline"
+                    href="{{ route('profile.show', $post->user->uid) }}">
                     {{ $post->user->name }}
                 </a>
             </div>
-            <p class="ml-auto text-green-700">{{ $post->category->name }}</p>
+            <p class="ml-auto whitespace-nowrap text-green-700">{{ $post->category->name }}</p>
         </div>
-        <div>
+        <div class="min-w-0">
             <a class="user-link hover:underline" href="{{ route('profile.show', $post->user->uid) }}">
                 {{ '@' . $post->user->uid }}
             </a>
-            <p class="py-1">{{ $post->title }}</p>
+            <p class="border-b py-1">{{ $post->title }}</p>
             <p class="py-1">{{ $post->content }}</p>
         </div>
     </div>

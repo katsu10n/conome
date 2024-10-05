@@ -5,7 +5,7 @@
             <button
                 class="inline-flex items-center gap-2 text-sm transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none">
                 <x-icons.icon-user class="h-6 w-6" />
-                <p>{{ Auth::user()->name ?? 'ゲスト' }}</p>
+                <p class="max-w-32 truncate">{{ Auth::user()->name ?? 'ゲスト' }}</p>
 
                 <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"

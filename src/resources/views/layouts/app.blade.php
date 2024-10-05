@@ -18,19 +18,19 @@
 
 <body class="min-h-dvh bg-white font-sans antialiased">
     <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
-        <header class="sticky top-0 z-20 grid grid-cols-[18rem_1fr_20rem] gap-8 bg-white" id="main-header">
+        <header class="sticky top-0 z-20 grid grid-cols-[18rem_minmax(0,1fr)_20rem] gap-8 bg-white" id="main-header">
             <div class="flex items-center justify-between">
                 <h1 class="py-4 text-lg font-bold"><a href="/">Conome</a></h1>
                 <x-users.user-nav-modal />
             </div>
-            <nav class="text-center text-sm font-medium text-gray-500">
+            <nav class="flex items-center overflow-hidden text-center text-sm font-medium text-gray-500">
                 @if (request()->routeIs('posts.index') ||
                         request()->routeIs('posts.category') ||
                         request()->routeIs('posts.followed') ||
                         request()->routeIs('posts.category.followed'))
                     <x-posts.post-header />
                 @else
-                    <div class="flex items-center gap-2 border-b border-gray-200 text-left">
+                    <div class="flex w-full items-center border-b border-gray-200 text-left">
                         {{ $backButton ?? '' }}
                     </div>
                 @endif
@@ -40,16 +40,16 @@
             </div>
         </header>
 
-        <div class="grid grid-cols-[18rem_1fr_20rem] gap-8">
-            <div class="max-h-dvh sidebar overflow-scroll">
+        <div class="grid grid-cols-[18rem_minmax(0,1fr)_20rem] gap-8">
+            <div class="max-h-dvh sidebar overflow-y-auto">
                 @include('layouts.sidebar-left')
             </div>
 
-            <main>
+            <main class="min-w-0">
                 {{ $slot }}
             </main>
 
-            <div class="max-h-dvh sidebar overflow-scroll">
+            <div class="max-h-dvh sidebar overflow-y-auto">
                 @include('layouts.sidebar-right')
             </div>
         </div>

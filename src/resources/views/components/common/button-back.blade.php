@@ -6,10 +6,10 @@
         <x-icons.icon-back class="h-6 w-6" />
     </a>
 
-    <div class="flex-grow cursor-pointer py-2" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
-        <p class="text-xl font-bold">{{ $main }}</p>
+    <div class="min-w-0 flex-grow cursor-pointer py-2" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+        <p class="truncate text-xl font-bold">{{ $main }}</p>
         @if ($sub)
-            <p class="text-sm text-gray-600">{{ $sub }}</p>
+            <p class="truncate text-sm text-gray-600">{{ $sub }}</p>
         @endif
     </div>
 </div>
