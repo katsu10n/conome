@@ -17,6 +17,7 @@ export default {
       colors: {
         bc: '#fff',
         main: '#FF8343',
+        mainLight: '#ffb793',
         sub: '#179BAE',
       },
     },

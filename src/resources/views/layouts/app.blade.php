@@ -41,16 +41,20 @@
         </header>
 
         <div class="grid grid-cols-[18rem_minmax(0,1fr)_20rem] gap-8">
-            <div class="max-h-dvh sidebar overflow-y-auto">
-                @include('layouts.sidebar-left')
+            <div class="scrollbar-wrapper">
+                <div class="max-h-dvh sidebar scrollbar overflow-y-auto">
+                    @include('layouts.sidebar-left')
+                </div>
             </div>
 
             <main class="min-w-0">
                 {{ $slot }}
             </main>
 
-            <div class="max-h-dvh sidebar overflow-y-auto">
-                @include('layouts.sidebar-right')
+            <div class="scrollbar-wrapper">
+                <div class="max-h-dvh sidebar scrollbar overflow-y-auto">
+                    @include('layouts.sidebar-right')
+                </div>
             </div>
         </div>
     </div>
