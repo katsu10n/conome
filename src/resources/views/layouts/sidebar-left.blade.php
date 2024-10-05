@@ -23,7 +23,7 @@
                     request()->route('category') &&
                     request()->route('category')->slug === $category->slug;
             @endphp
-            <x-nav-link class="group flex w-full items-center justify-between"
+            <x-nav-link class="group justify-between"
                 href="{{ request()->routeIs('posts.followed') || request()->routeIs('posts.category.followed')
                     ? route('posts.category.followed', $category->slug)
                     : route('posts.category', $category->slug) }}"
@@ -32,11 +32,12 @@
                 <form class="inline" action="{{ route('categories.favorite', $category) }}" method="POST">
                     @csrf
                     <input name="scroll_position" type="hidden" value="">
-                    <button class="favorite-btn ml-2 text-gray-400 transition-colors duration-200 hover:text-yellow-400"
+                    <button
+                        class="favorite-btn ml-2 flex items-center justify-center text-gray-400 transition-colors duration-200 hover:text-amber-400"
                         type="submit" onclick="this.form.elements.scroll_position.value = window.pageYOffset;">
                         <x-icons.icon-star
-                            class="{{ $category->is_favorited ? 'text-yellow-400' : 'opacity-0 group-hover:opacity-100' }}"
-                            :filled="$category->is_favorited" />
+                            class="{{ $category->is_favorited ? 'text-amber-400' : 'opacity-0 group-hover:opacity-100' }}"
+                            :fill="$category->is_favorited" />
                     </button>
                 </form>
             </x-nav-link>

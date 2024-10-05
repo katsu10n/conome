@@ -4,8 +4,8 @@
     <a href="{{ $href }}"
         {{ $attributes->merge([
             'class' =>
-                'block py-2 transition-all duration-200 ease-in-out hover: hover:text-gray-400 flex gap-4' .
-                ($active ? ' text-main hover:text-main' : ' border-transparent text-gray-600 '),
+                'block flex w-full items-center gap-4 py-3 rounded-xl px-4 transition-all duration-200 ease-in-out hover:bg-slate-100' .
+                ($active ? ' text-sub font-bold hover:text-sub' : ' border-transparent text-gray-600 '),
         ]) }}>
         {{ $slot }}
     </a>
