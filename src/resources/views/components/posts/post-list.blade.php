@@ -57,7 +57,7 @@
                 </div>
             @endif
 
-            <p class="text-gray-500">{{ $post->created_at->format('Y年n月j日 H:i') }}</p>
+            <p class="text-gray-500">{{ $post->created_at->format(!$isLink ? 'Y年n月j日 H:i' : 'n月j日 H:i') }}</p>
         </div>
     </div>
 </div>

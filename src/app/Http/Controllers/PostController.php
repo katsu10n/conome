@@ -22,7 +22,6 @@ class PostController extends Controller
         }
 
         $posts = $postsQuery->get()->map(function ($post) {
-            $post->created_at_for_humans = $post->created_at->diffForHumans();
             return $post;
         });
 
@@ -43,7 +42,6 @@ class PostController extends Controller
         }
 
         $posts = $postsQuery->get()->map(function ($post) {
-            $post->created_at_for_humans = $post->created_at->diffForHumans();
             return $post;
         });
 
@@ -68,11 +66,6 @@ class PostController extends Controller
         $post->load('comments.user');
 
         return view('pages.posts.show', compact('post', 'currentUserId'));
-    }
-
-    public function edit(Post $post)
-    {
-        //
     }
 
     public function update(UpdatePostRequest $request, Post $post)
