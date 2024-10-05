@@ -27,16 +27,15 @@
                     : route('posts.category', $category->slug) }}"
                 :active="$isCategoryActive">
                 <span>{{ $category->name }}</span>
-                @auth
+                <form class="inline" action="{{ route('categories.favorite', $category) }}" method="POST">
+                    @csrf
                     <button class="favorite-btn ml-2 text-gray-400 transition-colors duration-200 hover:text-yellow-400"
-                        data-category-id="{{ $category->id }}"
-                        data-is-favorited="{{ $category->is_favorited ? 'true' : 'false' }}"
-                        onclick="event.preventDefault(); toggleFavorite(this);">
+                        type="submit">
                         <x-icons.icon-star
                             class="{{ $category->is_favorited ? 'text-yellow-400' : 'opacity-0 group-hover:opacity-100' }}"
                             :filled="$category->is_favorited" />
                     </button>
-                @endauth
+                </form>
             </x-nav-link>
         @endforeach
     </ul>

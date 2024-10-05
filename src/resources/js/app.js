@@ -8,6 +8,5 @@ Alpine.start();
 
 import './sticky.js';
 import './fixed.js';
-import './favorite.js';
 import './like.js';
 import './nav-post.js';

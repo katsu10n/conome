@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class FavoriteController extends Controller
 {
@@ -18,15 +19,15 @@ class FavoriteController extends Controller
 
         if ($favorite) {
             $favorite->delete();
-            $isFavorited = false;
         } else {
             Favorite::create([
                 'user_id' => $user->id,
                 'category_id' => $category->id
             ]);
-            $isFavorited = true;
         }
 
-        return response()->json(['isFavorited' => $isFavorited]);
+        Cache::forget('sidebar_categories_' . Auth::id());
+
+        return redirect()->back();
     }
 }
