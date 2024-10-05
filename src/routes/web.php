@@ -17,15 +17,18 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/settings', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('posts', PostController::class)->only(['index', 'show', 'store', 'destroy']);
-    Route::get('posts/category/{category?}', [PostController::class, 'index'])->name('posts.category');
+    Route::get('/', [PostController::class, 'index'])->name('posts.index');
+    Route::get('/posts/followed', [PostController::class, 'indexFollowed'])->name('posts.followed');
+    Route::get('/{uid}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-    Route::get('posts/sorted/follow', [PostController::class, 'indexFollowed'])->name('posts.followed');
-    Route::get('posts/category/{category}/follow', [PostController::class, 'indexFollowed'])->name('posts.category.followed');
+    Route::get('/categories/{category:slug}', [PostController::class, 'index'])->name('posts.category');
+    Route::get('/categories/{category:slug}/followed', [PostController::class, 'indexFollowed'])->name('posts.category.followed');
 
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
@@ -34,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/like', [LikeController::class, 'toggle'])->name('posts.like');
 
     Route::get('/{uid}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/{uid}/comments', [ProfileController::class, 'comments'])->name('profile.comments');
+    Route::get('/{uid}/likes', [ProfileController::class, 'likes'])->name('profile.likes');
 
     Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
     Route::delete('/unfollow/{user}', [FollowController::class, 'unfollow'])->name('unfollow');

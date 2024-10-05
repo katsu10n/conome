@@ -1,5 +1,4 @@
-<form class="flex w-full flex-col bg-white px-4 py-8 sm:px-6 md:px-8 lg:px-10" action="{{ route('posts.store') }}"
-    method="POST">
+<form class="flex w-full flex-col bg-white" action="{{ route('posts.store') }}" method="POST">
     @csrf
 
     <div class="mb-2 flex flex-col">

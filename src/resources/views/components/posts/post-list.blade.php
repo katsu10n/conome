@@ -7,31 +7,32 @@
 @endphp
 
 <div class="{{ $baseClasses }} {{ $linkClasses }} post-container"
-    data-post-url="{{ $isLink ? route('posts.show', $post) : '' }}">
+    data-post-url="{{ $isLink ? route('posts.show', ['uid' => $post->user->uid, 'post' => $post]) : '' }}">
     <div class="row-span-2 mr-2">
         <x-icons.icon-user class="h-10 w-10 text-gray-400" />
     </div>
-    <div class="flex flex-col">
+    <div class="flex min-w-0 flex-col">
         <div class="flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-                <a class="user-link font-semibold hover:underline" href="{{ route('profile.show', $post->user->uid) }}">
+            <div class="flex min-w-0 flex-1 items-center gap-2">
+                <a class="user-link truncate font-semibold hover:underline"
+                    href="{{ route('profile.show', $post->user->uid) }}">
                     {{ $post->user->name }}
                 </a>
             </div>
-            <p class="ml-auto text-green-700">{{ $post->category->name }}</p>
+            <p class="ml-auto whitespace-nowrap text-sub">{{ $post->category->name }}</p>
         </div>
-        <div>
+        <div class="min-w-0">
             <a class="user-link hover:underline" href="{{ route('profile.show', $post->user->uid) }}">
                 {{ '@' . $post->user->uid }}
             </a>
-            <p class="py-1">{{ $post->title }}</p>
+            <p class="border-b py-1">{{ $post->title }}</p>
             <p class="py-1">{{ $post->content }}</p>
         </div>
     </div>
     <div class="mt-2">
         <div class="col-span-2 flex justify-between gap-2">
-            <div class="mr-8 flex items-center">
-                <x-icons.icon-comment class="mr-1 h-4 w-4" />
+            <div class="mr-8 flex items-center gap-2">
+                <x-icons.icon-comment class="h-4 w-4" />
                 <span>{{ $post->comments->count() }}</span>
             </div>
             <div class="mr-8 flex items-center">
@@ -39,7 +40,7 @@
                     class="like-button {{ $post->isLikedBy(Auth::user()) ? 'text-red-500 hover:text-red-600' : 'text-gray-400 hover:text-red-500' }} mr-2 flex items-center"
                     data-post-id="{{ $post->id }}"
                     data-liked="{{ $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}" type="button">
-                    <x-icons.icon-heart class="{{ $post->isLikedBy(Auth::user()) ? 'fill-current' : '' }} h-6 w-6" />
+                    <x-icons.icon-heart class="{{ $post->isLikedBy(Auth::user()) ? 'fill-current' : '' }}" />
                 </button>
                 <span class="like-count text-sm" data-post-id="{{ $post->id }}">{{ $post->likes->count() }}</span>
             </div>
@@ -57,7 +58,7 @@
                 </div>
             @endif
 
-            <p class="text-gray-500">{{ $post->created_at->format('Y年n月j日 H:i') }}</p>
+            <p class="text-gray-500">{{ $post->created_at->format(!$isLink ? 'Y年n月j日 H:i' : 'n月j日 H:i') }}</p>
         </div>
     </div>
 </div>

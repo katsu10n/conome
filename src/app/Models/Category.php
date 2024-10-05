@@ -26,4 +26,9 @@ class Category extends Model
     {
         return $this->favorites()->where('user_id', Auth::id())->exists();
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

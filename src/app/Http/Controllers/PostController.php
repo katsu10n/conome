@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function index($category = null)
+    public function index(Category $category = null)
     {
         $currentUserId = Auth::id();
 
@@ -17,15 +18,36 @@ class PostController extends Controller
             ->orderBy('created_at', 'desc');
 
         if ($category) {
-            $postsQuery->where('category_id', $category);
+            $postsQuery->where('category_id', $category->id);
         }
 
         $posts = $postsQuery->get()->map(function ($post) {
-            $post->created_at_for_humans = $post->created_at->diffForHumans();
             return $post;
         });
 
-        return view('pages.posts.index', compact('posts', 'currentUserId'));
+        return view('pages.posts.index', compact('posts', 'currentUserId', 'category'));
+    }
+
+    public function indexFollowed(Category $category = null)
+    {
+        $currentUserId = Auth::id();
+        $followedUserIds = Auth::user()->following()->pluck('users.id');
+
+        $postsQuery = Post::with(['user', 'category'])
+            ->whereIn('user_id', $followedUserIds)
+            ->orderBy('created_at', 'desc');
+
+        if ($category) {
+            $postsQuery->where('category_id', $category->id);
+        }
+
+        $posts = $postsQuery->get()->map(function ($post) {
+            return $post;
+        });
+
+        $isFollowedPosts = true;
+
+        return view('pages.posts.index', compact('posts', 'currentUserId', 'isFollowedPosts', 'category'));
     }
 
     public function store(StorePostRequest $request)
@@ -38,17 +60,12 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with('success', '投稿が作成されました。');
     }
 
-    public function show(Post $post)
+    public function show($uid, Post $post)
     {
         $currentUserId = Auth::id();
         $post->load('comments.user');
 
         return view('pages.posts.show', compact('post', 'currentUserId'));
-    }
-
-    public function edit(Post $post)
-    {
-        //
     }
 
     public function update(UpdatePostRequest $request, Post $post)
@@ -65,29 +82,6 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('posts.index');
-    }
-
-    public function indexFollowed($category = null)
-    {
-        $currentUserId = Auth::id();
-        $followedUserIds = Auth::user()->following()->pluck('users.id');
-
-        $postsQuery = Post::with(['user', 'category'])
-            ->whereIn('user_id', $followedUserIds)
-            ->orderBy('created_at', 'desc');
-
-        if ($category) {
-            $postsQuery->where('category_id', $category);
-        }
-
-        $posts = $postsQuery->get()->map(function ($post) {
-            $post->created_at_for_humans = $post->created_at->diffForHumans();
-            return $post;
-        });
-
-        $isFollowedPosts = true;
-
-        return view('pages.posts.index', compact('posts', 'currentUserId', 'isFollowedPosts'));
     }
 
     public function getPopularPosts()

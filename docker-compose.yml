@@ -45,3 +45,4 @@ services:
 volumes:
   postgres-data:
   pgadmin-data:
+  node_modules:

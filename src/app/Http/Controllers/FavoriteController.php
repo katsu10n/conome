@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Favorite;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class FavoriteController extends Controller
 {
-    public function toggle(Category $category)
+    public function toggle(Request $request, Category $category)
     {
         $user = Auth::user();
 
@@ -18,15 +20,15 @@ class FavoriteController extends Controller
 
         if ($favorite) {
             $favorite->delete();
-            $isFavorited = false;
         } else {
             Favorite::create([
                 'user_id' => $user->id,
                 'category_id' => $category->id
             ]);
-            $isFavorited = true;
         }
 
-        return response()->json(['isFavorited' => $isFavorited]);
+        Cache::forget('sidebar_categories_' . Auth::id());
+
+        return redirect()->back()->withInput(['scroll_to' => $request->input('scroll_position')]);
     }
 }

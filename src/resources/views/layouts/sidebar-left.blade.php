@@ -1,34 +1,46 @@
 <nav class="mb-8">
     <ul>
-        <div class="border-b">
-            <x-nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.show') && request()->route('uid') == Auth::user()->uid">
+        <div class="border-b-2 border-slate-200">
+            <x-common.nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
+                <x-icons.icon-person />
                 プロフィール
-            </x-nav-link>
-            <x-nav-link href="" :active="false">
+            </x-common.nav-link>
+            <x-common.nav-link>
+                <x-icons.icon-notice />
                 通知（未実装）
-            </x-nav-link>
+            </x-common.nav-link>
         </div>
-        <x-nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.show') && !request()->route('category')">
+        <x-common.nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') &&
+            !request()->route('category') &&
+            !request()->routeIs('posts.show')">
             すべて
-        </x-nav-link>
+        </x-common.nav-link>
         @foreach ($categories as $category)
-            <x-nav-link class="group flex w-full items-center justify-between"
+            @php
+                $isCategoryActive =
+                    !request()->routeIs('profile.*') &&
+                    !request()->routeIs('posts.show') &&
+                    request()->route('category') &&
+                    request()->route('category')->slug === $category->slug;
+            @endphp
+            <x-common.nav-link class="group justify-between"
                 href="{{ request()->routeIs('posts.followed') || request()->routeIs('posts.category.followed')
-                    ? route('posts.category.followed', $category->id)
-                    : route('posts.category', $category->id) }}"
-                :active="!request()->routeIs('profile.show') && request()->route('category') == $category->id">
+                    ? route('posts.category.followed', $category->slug)
+                    : route('posts.category', $category->slug) }}"
+                :active="$isCategoryActive">
                 <span>{{ $category->name }}</span>
-                @auth
-                    <button class="favorite-btn ml-2 text-gray-400 transition-colors duration-200 hover:text-yellow-400"
-                        data-category-id="{{ $category->id }}"
-                        data-is-favorited="{{ $category->is_favorited ? 'true' : 'false' }}"
-                        onclick="event.preventDefault(); toggleFavorite(this);">
+                <form class="inline" action="{{ route('categories.favorite', $category) }}" method="POST">
+                    @csrf
+                    <input name="scroll_position" type="hidden" value="">
+                    <button
+                        class="favorite-btn ml-2 flex items-center justify-center text-gray-400 transition-all hover:text-main"
+                        type="submit" onclick="this.form.elements.scroll_position.value = window.pageYOffset;">
                         <x-icons.icon-star
-                            class="{{ $category->is_favorited ? 'text-yellow-400' : 'opacity-0 group-hover:opacity-100' }}"
-                            :filled="$category->is_favorited" />
+                            class="{{ $category->is_favorited ? 'text-mainLight hover:opacity-70' : 'opacity-0 group-hover:opacity-100' }} transition-all"
+                            :fill="$category->is_favorited" />
                     </button>
-                @endauth
-            </x-nav-link>
+                </form>
+            </x-common.nav-link>
         @endforeach
     </ul>
 </nav>

@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-        //
-    }
-
     public function boot(): void
     {
         if ($this->app->environment('production')) {
@@ -25,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['layouts.sidebar-left', 'components.posts.post-form'], function ($view) {
             $categories = Cache::remember('sidebar_categories_' . Auth::id(), now()->addHours(24), function () {
-                return Category::select('id', 'name')
+                $categories = Category::select('id', 'name', 'slug')
                     ->withCount(['favorites' => function ($query) {
                         $query->where('user_id', Auth::id());
                     }])
@@ -34,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
                         $category->is_favorited = $category->favorites_count > 0;
                         return $category;
                     });
+
+                $sortedCategories = $categories->sortByDesc('is_favorited');
+
+                return $sortedCategories->values()->all();
             });
 
             $view->with('categories', $categories);
