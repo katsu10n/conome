@@ -11,7 +11,8 @@
         <x-common.button-back :main="$user->name" :sub="$subText" />
     </x-slot>
 
-    <div class="mt-4" x-data="{ followerModalOpen: false, followingModalOpen: false }">
+    <div class="mt-4" x-data="{ followerModalOpen: false, followingModalOpen: false }" @open-follower-modal.window="followerModalOpen = true"
+        @open-following-modal.window="followingModalOpen = true">
         <x-users.user-list-modal title="フォロワー" :users="$user->followers" :isFollowerModal="true" open="followerModalOpen" />
         <x-users.user-list-modal title="フォロー中" :users="$user->following" :isFollowerModal="false" open="followingModalOpen" />
 

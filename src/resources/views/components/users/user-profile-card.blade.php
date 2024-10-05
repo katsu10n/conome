@@ -1,5 +1,7 @@
-<div
-    class="relative mx-auto flex flex-col items-center rounded-xl border-[1px] border-gray-200 bg-clip-border p-4 shadow-md shadow-[#F3F3F3]">
+@props(['user'])
+
+<div class="relative mx-auto flex flex-col items-center rounded-xl border-[1px] border-gray-200 bg-clip-border p-4 shadow-md shadow-[#F3F3F3]"
+    x-data="{ editModalOpen: false }">
     <div class="relative flex h-32 w-full justify-center rounded-xl bg-cover">
         <div class="absolute flex h-36 w-full justify-center rounded-xl bg-gray-300 bg-cover"></div>
         <div
@@ -12,8 +14,10 @@
             @if (Auth::id() !== $user->id)
                 <x-users.user-follow-button :user="$user" />
             @else
-                <a class="bg-navy-600 hover:bg-navy-700 mt-4 rounded-md px-4 py-2"
-                    href="{{ route('profile.edit', $user->uid) }}">プロフィールを編集</a>
+                <button class="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                    @click="editModalOpen = true">
+                    プロフィール編集
+                </button>
             @endif
         </div>
         <p class="mt-4 text-xl font-bold">{{ $user->name }}</p>
@@ -22,7 +26,7 @@
     </div>
     <div class="mb-3 mt-6 flex gap-14">
         <div class="flex cursor-pointer flex-col items-center justify-center hover:text-gray-600"
-            @click="followerModalOpen = true">
+            @click="$dispatch('open-follower-modal')">
             <p class="text-navy-700 text-xl font-bold">
                 {{ $user->followers->count() }}
             </p>
@@ -31,7 +35,7 @@
             </p>
         </div>
         <div class="flex cursor-pointer flex-col items-center justify-center hover:text-gray-400"
-            @click="followingModalOpen = true">
+            @click="$dispatch('open-following-modal')">
             <p class="text-navy-700 text-xl font-bold">
                 {{ $user->following->count() }}
             </p>
@@ -40,4 +44,8 @@
             </p>
         </div>
     </div>
+
+    <x-common.modal-card open="editModalOpen">
+        <x-users.user-profile-edit-form :user="$user" />
+    </x-common.modal-card>
 </div>
