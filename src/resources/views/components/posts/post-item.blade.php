@@ -42,37 +42,38 @@
             <p class="pt-1">{{ $post->content }}</p>
         </div>
     </div>
-    <div>
-        <div class="flex items-end justify-between">
-            <div class="mr-8 flex items-center gap-2">
-                <x-icons.icon-comment class="w-5" />
-                <span>{{ $post->comments->count() }}</span>
-            </div>
-            <div class="mr-8 flex items-center">
-                <button
-                    class="like-button {{ $post->isLikedBy(Auth::user()) ? 'text-red-500 hover:text-red-600' : 'text-textLight hover:text-red-500' }} mr-2 flex items-center"
-                    data-post-id="{{ $post->id }}"
-                    data-liked="{{ $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}" type="button">
-                    <x-icons.icon-heart class="{{ $post->isLikedBy(Auth::user()) ? 'fill-current' : '' }} w-6" />
-                </button>
-                <span class="like-count text-sm" data-post-id="{{ $post->id }}">{{ $post->likes->count() }}</span>
-            </div>
-            @if ($post->user_id === $currentUserId)
-                <div class="mr-8 flex items-center">
-                    <form class="delete-form flex items-center" action="{{ route('posts.destroy', $post) }}"
-                        method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="flex items-center text-red-600 hover:text-red-800" type="submit">
-                            <x-icons.icon-trash class="mr-1 h-5 w-5" />
-                            削除
-                        </button>
-                    </form>
-                </div>
-            @endif
-
-            <p class="text-textLight text-sm">
-                {{ $post->created_at->format(!$isLink ? 'Y年n月j日 H:i' : 'n月j日 H:i') }}</p>
+    <div class="flex items-end justify-between pt-1">
+        <div
+            class="{{ $post->comments->contains('user_id', Auth::id()) ? 'text-green-600 hover:opacity-70' : ' hover:text-green-600' }} mr-8 flex items-center gap-2 transition">
+            <x-icons.icon-comment class="w-5" />
+            <span>{{ $post->comments->count() }}</span>
         </div>
+        <div class="mr-8 flex items-center">
+            <button
+                class="like-button {{ $post->likes->contains('user_id', Auth::id()) ? 'text-red-500 hover:opacity-70' : ' hover:text-red-500' }} mr-2 flex items-center transition"
+                data-post-id="{{ $post->id }}"
+                data-liked="{{ $post->likes->contains('user_id', Auth::id()) ? 'true' : 'false' }}" type="button">
+                <x-icons.icon-heart
+                    class="{{ $post->likes->contains('user_id', Auth::id()) ? 'fill-current' : '' }} w-6" />
+                <span class="like-count ml-2 text-sm"
+                    data-post-id="{{ $post->id }}">{{ $post->likes->count() }}</span>
+            </button>
+        </div>
+        @if ($post->user_id === $currentUserId)
+            <div class="mr-8 flex items-center">
+                <form class="delete-form flex items-center" action="{{ route('posts.destroy', $post) }}"
+                    method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="flex items-center text-red-600 hover:text-red-800" type="submit">
+                        <x-icons.icon-trash class="mr-1 h-5 w-5" />
+                        削除
+                    </button>
+                </form>
+            </div>
+        @endif
+
+        <p class="text-textLight text-sm">
+            {{ $post->created_at->format(!$isLink ? 'Y年n月j日 H:i' : 'n月j日 H:i') }}</p>
     </div>
 </div>

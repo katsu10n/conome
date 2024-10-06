@@ -25,7 +25,7 @@
                         class="favorite-btn easein ml-2 flex items-center justify-center text-gray-dark transition ease-in hover:text-main"
                         type="submit" onclick="this.form.elements.scroll_position.value = window.pageYOffset;">
                         <x-icons.icon-star
-                            class="{{ $category->is_favorited ? 'text-main-light hover:opacity-70' : 'opacity-0 group-hover:opacity-100' }} transition-all"
+                            class="{{ $category->is_favorited ? 'text-main-light hover:opacity-70' : 'opacity-0 group-hover:opacity-100' }} w-6 transition-all"
                             :fill="$category->is_favorited" />
                     </button>
                     <input name="scroll_position" type="hidden" value="">
