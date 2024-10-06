@@ -3,7 +3,7 @@
         <h1 class="pt-1 text-2xl font-bold"><a href="/"><img class="h-auto w-12" src="{{ asset('images/logo.png') }}"
                     alt="Logo"></a></h1>
         <div class="ml-auto flex items-center gap-4">
-            <x-users.user-nav-modal />
+            <x-users.user-nav-dropdown />
             <x-posts.post-form-modal-icon />
         </div>
     </div>

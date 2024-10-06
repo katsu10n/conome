@@ -44,7 +44,7 @@
     </div>
     <div class="flex items-end justify-between pt-1">
         <div
-            class="{{ $post->comments->contains('user_id', Auth::id()) ? 'text-green-600 hover:opacity-70' : ' hover:text-green-600' }} mr-8 flex items-center gap-2 transition">
+            class="{{ $post->comments->contains('user_id', Auth::id()) ? 'text-green-600' : ' ' }} mr-8 flex items-center gap-2 transition">
             <x-icons.icon-comment class="w-5" />
             <span>{{ $post->comments->count() }}</span>
         </div>
@@ -59,19 +59,9 @@
                     data-post-id="{{ $post->id }}">{{ $post->likes->count() }}</span>
             </button>
         </div>
-        @if ($post->user_id === $currentUserId)
-            <div class="mr-8 flex items-center">
-                <form class="delete-form flex items-center" action="{{ route('posts.destroy', $post) }}"
-                    method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="flex items-center text-red-600 hover:text-red-800" type="submit">
-                        <x-icons.icon-trash class="mr-1 h-5 w-5" />
-                        削除
-                    </button>
-                </form>
-            </div>
-        @endif
+        <div class="post-dropdown -mb-[5px]">
+            <x-posts.post-nav-dropdown :post="$post" :current-user-id="$currentUserId" />
+        </div>
 
         <p class="text-textLight text-sm">
             {{ $post->created_at->format(!$isLink ? 'Y年n月j日 H:i' : 'n月j日 H:i') }}</p>

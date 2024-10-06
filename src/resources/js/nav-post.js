@@ -6,18 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const postUrl = postContainer.dataset.postUrl;
     if (!postUrl) return;
 
-    if (event.target.closest('.user-link, .like-button, .delete-form')) {
+    if (event.target.closest('.user-link, .like-button, .post-dropdown')) {
       return;
     }
 
     window.location.href = postUrl;
-  });
-
-  document.body.addEventListener('submit', function (event) {
-    if (event.target.closest('.delete-form')) {
-      if (!confirm('本当に削除しますか？')) {
-        event.preventDefault();
-      }
-    }
   });
 });
