@@ -9,7 +9,8 @@
         </div>
 
         <div>
-            <x-comments.comment-form-modal :post="$post" />
+            {{-- <x-comments.comment-form-modal :post="$post" /> --}}
+            <x-comments.comment-form :post="$post" />
         </div>
 
         <div>
