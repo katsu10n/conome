@@ -7,29 +7,30 @@
         @method('delete')
 
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Are you sure you want to delete your account?') }}
+            {{ __('本当にアカウントを削除しますか？') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+            {{ __('アカウントを削除すると、そのすべてのリソースとデータが完全に削除されます。') }}<br />
+            {{ __('アカウントを完全に削除するにはパスワードを入力してください。') }}
         </p>
 
         <div class="mt-6">
-            <x-input-label class="sr-only" for="password" value="{{ __('Password') }}" />
+            <x-common.input-label class="sr-only" for="password" value="{{ __('パスワード') }}" />
 
-            <x-text-input class="mt-1 block w-3/4" id="password" name="password" type="password"
-                placeholder="{{ __('Password') }}" />
+            <x-common.input-text class="mt-1 block w-3/4" id="password" name="password" type="password"
+                placeholder="{{ __('パスワード') }}" />
 
             <x-input-error class="mt-2" :messages="$errors->userDeletion->get('password')" />
         </div>
 
         <div class="mt-6 flex justify-end">
             <x-secondary-button x-on:click="$dispatch('close')">
-                {{ __('Cancel') }}
+                {{ __('キャンセル') }}
             </x-secondary-button>
 
             <x-danger-button class="ms-3">
-                {{ __('Delete Account') }}
+                {{ __('アカウント削除') }}
             </x-danger-button>
         </div>
     </form>
