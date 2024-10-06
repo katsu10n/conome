@@ -15,13 +15,23 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-dvh bg-bc font-IBM text-text antialiased">
+<body class="min-h-dvh list-none bg-bc font-IBM text-text antialiased">
     <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
         @include('layouts.header')
 
         <div class="grid grid-cols-[16rem_minmax(0,1fr)_20rem] gap-8">
-            <div class="scrollbar-wrapper">
-                <div class="max-h-dvh sidebar scrollbar overflow-y-auto">
+            <div class="scrollbar-wrapper sidebar">
+                <div class="border-b">
+                    <x-common.nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
+                        <x-icons.icon-person />
+                        プロフィール
+                    </x-common.nav-link>
+                    <x-common.nav-link>
+                        <x-icons.icon-notice />
+                        通知（未実装）
+                    </x-common.nav-link>
+                </div>
+                <div class="max-h-dvh scrollbar overflow-y-auto">
                     @include('layouts.sidebar-left')
                 </div>
             </div>

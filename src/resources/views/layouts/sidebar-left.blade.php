@@ -1,6 +1,6 @@
 <nav class="mb-8">
     <ul>
-        <div class="border-b">
+        {{-- <div class="border-b">
             <x-common.nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
                 <x-icons.icon-person />
                 プロフィール
@@ -9,7 +9,7 @@
                 <x-icons.icon-notice />
                 通知（未実装）
             </x-common.nav-link>
-        </div>
+        </div> --}}
         <x-common.nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') &&
             !request()->route('category') &&
             !request()->routeIs('posts.show')">
