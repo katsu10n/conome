@@ -1,6 +1,7 @@
 <header class="sticky top-0 z-20 grid grid-cols-[16rem_minmax(0,1fr)_20rem] gap-8 bg-bc" id="main-header">
     <div class="-mt-1 flex items-center">
-        <h1 class="text-2xl font-bold"><a href="/">Conome</a></h1>
+        <h1 class="pt-1 text-2xl font-bold"><a href="/"><img class="h-auto w-12" src="{{ asset('images/logo.png') }}"
+                    alt="Logo"></a></h1>
         <div class="ml-auto flex items-center gap-4">
             <x-users.user-nav-modal />
             <x-posts.post-form-modal-icon />
