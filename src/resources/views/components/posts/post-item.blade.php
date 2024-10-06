@@ -20,7 +20,7 @@
                     {{ $post->user->name }}
                 </a>
             </div>
-            <div class="relative ml-auto inline-block whitespace-nowrap">
+            <div class="relative ml-auto inline-block whitespace-nowrap text-sm">
                 <div class="absolute inset-0 flex text-text-light">
                     <svg height="100%" viewBox="0 0 50 100">
                         <path

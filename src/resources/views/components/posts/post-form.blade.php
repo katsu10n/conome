@@ -1,29 +1,25 @@
-<form class="flex w-full flex-col bg-white" action="{{ route('posts.store') }}" method="POST">
+<form class="grid w-full grid-cols-[1fr] gap-2" action="{{ route('posts.store') }}" method="POST">
     @csrf
 
-    <div class="mb-2 flex flex-col">
-        <select class="rounded-lg border border-gray-300 px-4 py-2" name="category_id" required>
-            <option value="">カテゴリーを選択</option>
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="mb-2 flex flex-col">
-        <input
-            class="w-full flex-1 appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-            id="title" name="title" type="text" placeholder="タイトル" required />
-    </div>
-    <div class="mb-6 flex flex-col">
-        <textarea
-            class="w-full flex-1 appearance-none rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600"
-            id="content" name="content" placeholder="内容" rows="4" required></textarea>
-    </div>
-    <div class="flex w-full">
-        <button
-            class="w-full rounded-lg bg-purple-600 px-4 py-2 text-center text-base font-semibold text-white shadow-md transition duration-200 ease-in hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-            type="submit">
-            投稿する
-        </button>
-    </div>
+    <select
+        class="w-full rounded-lg border border-gray px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-main"
+        name="category_id" required>
+        <option value="">カテゴリーを選択</option>
+        @foreach ($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+    </select>
+    <input
+        class="w-full flex-1 appearance-none rounded-lg border border-gray px-4 py-2 text-base placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-main"
+        id="title" name="title" type="text" placeholder="タイトル" required />
+    <textarea
+        class="w-full flex-1 resize-none appearance-none rounded-lg border border-gray px-4 py-2 text-base placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-main"
+        id="content" name="content" placeholder="内容" rows="4" required>
+    </textarea>
+    <button
+        class="flex w-full justify-center gap-1 rounded-lg bg-main-light px-4 py-2 text-center text-base font-bold text-bc shadow-md transition duration-200 ease-in hover:bg-main"
+        type="submit">
+        <span>投稿する</span>
+        <x-icons.icon-post-add class="relative top-[3px] w-5" />
+    </button>
 </form>

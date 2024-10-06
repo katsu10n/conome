@@ -15,11 +15,11 @@
             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200"
             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-            <div class="bg-white px-6 pb-4 pt-2">
+            <div class="bg-bc p-4">
                 @if ($title)
-                    <div class="flex items-center gap-4 text-center text-lg font-bold leading-6" id="modal-title">
+                    <div class="flex items-center gap-2 pb-2 text-center text-lg font-bold leading-6" id="modal-title">
                         <x-icons.icon-close
-                            class="inline-block h-10 w-10 flex-shrink-0 cursor-pointer rounded-lg border border-transparent p-2 text-gray-700 hover:border-gray-300 hover:bg-gray-100"
+                            class="inline-block w-6 flex-shrink-0 cursor-pointer transition hover:text-main"
                             @click="$dispatch('close-modal')" />
                         <h3>{{ $title }}</h3>
                     </div>
