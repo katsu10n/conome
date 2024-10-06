@@ -1,13 +1,12 @@
-<div class="hidden sm:flex sm:items-center">
+<div class="-mb-2 flex items-center">
     <x-common.dropdown align="right" width="w-48">
         <x-slot name="trigger">
             <button
-                class="inline-flex items-center gap-2 text-sm transition duration-150 ease-in-out hover:text-main focus:outline-none">
+                class="inline-flex items-center gap-4 transition duration-150 ease-in-out hover:text-main focus:outline-none">
 
-                <x-icons.icon-user />
-                <p class="max-w-36 truncate">{{ Auth::user()->name ?? 'ゲスト' }}</p>
-
-                <x-icons.icon-arrow-down class="h-5 w-5" />
+                <x-icons.icon-user class="h-8 w-8" />
+                {{-- <p class="max-w-36 truncate">{{ Auth::user()->name ?? 'ゲスト' }}</p>
+                <x-icons.icon-arrow-down class="h-5 w-5" /> --}}
             </button>
         </x-slot>
 

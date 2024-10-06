@@ -1,7 +1,9 @@
 <header class="sticky top-0 z-20 grid grid-cols-[16rem_minmax(0,1fr)_20rem] gap-8 bg-bc" id="main-header">
-    <div class="flex items-center justify-between">
-        <h1 class="py-4 text-lg font-bold"><a href="/">Conome</a></h1>
-        <x-users.user-nav-modal />
+    <div class="-mt-1 flex items-center justify-between">
+        <h1 class="text-2xl font-bold"><a href="/">Conome</a></h1>
+        <div class="">
+            <x-users.user-nav-modal />
+        </div>
     </div>
     <nav class="flex items-center overflow-hidden text-center">
         @if (request()->routeIs('posts.index') ||
