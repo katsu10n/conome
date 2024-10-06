@@ -1,5 +1,8 @@
 <x-guest-layout>
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <form action="{{ route('test-login') }}" method="POST">
+        @csrf
+        <button class="mb-8 w-full border-b-4 border-black text-3xl" type="submit">テストユーザーでログイン</button>
+    </form>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -7,14 +10,14 @@
         <div>
             <x-common.input-label for="email" :value="__('メールアドレス')" />
             <x-common.input-text class="mt-1 block w-full" id="email" name="email" type="email" :value="old('email')"
-                required autofocus autocomplete="username" />
+                autofocus autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
         </div>
 
         <div class="mt-4">
             <x-common.input-label for="password" :value="__('パスワード')" />
 
-            <x-common.input-text class="mt-1 block w-full" id="password" name="password" type="password" required
+            <x-common.input-text class="mt-1 block w-full" id="password" name="password" type="password"
                 autocomplete="current-password" />
 
             <x-input-error class="mt-2" :messages="$errors->get('password')" />
@@ -29,12 +32,12 @@
         </div>
 
         <div class="mt-4 flex items-center justify-end">
-            {{-- @if (Route::has('password.request'))
+            @if (Route::has('password.request'))
                 <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    href="{{ route('password.request') }}">
+                    {{-- href="{{ route('password.request') }}" --}}>
                     {{ __('パスワードを忘れましたか？') }}
                 </a>
-            @endif --}}
+            @endif
 
             <x-primary-button class="ms-3">
                 {{ __('ログイン') }}

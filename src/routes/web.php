@@ -9,13 +9,16 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use PharIo\Manifest\AuthorCollectionIterator;
 
 Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('posts.index');
     }
-    return view('pages.index');
+    return view('auth.login');
 });
+
+Route::post('/test-login', [AuthenticatedSessionController::class, 'login'])->name('test-login');
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
