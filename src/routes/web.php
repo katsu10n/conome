@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowController;
@@ -13,8 +14,10 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('posts.index');
     }
-    return view('auth.login');
+    return view('pages.index');
 });
+
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/settings', [ProfileController::class, 'edit'])->name('profile.edit');
