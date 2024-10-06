@@ -31,14 +31,14 @@
                 <span>{{ $category->name }}</span>
                 <form class="inline" action="{{ route('categories.favorite', $category) }}" method="POST">
                     @csrf
-                    <input name="scroll_position" type="hidden" value="">
                     <button
-                        class="favorite-btn ml-2 flex items-center justify-center text-gray-400 transition-all hover:text-main"
+                        class="favorite-btn ml-2 flex items-center justify-center text-gray-dark transition-all hover:text-main"
                         type="submit" onclick="this.form.elements.scroll_position.value = window.pageYOffset;">
                         <x-icons.icon-star
-                            class="{{ $category->is_favorited ? 'text-mainLight hover:opacity-70' : 'opacity-0 group-hover:opacity-100' }} transition-all"
+                            class="{{ $category->is_favorited ? 'text-main-light hover:opacity-70' : 'opacity-0 group-hover:opacity-100' }} transition-all"
                             :fill="$category->is_favorited" />
                     </button>
+                    <input name="scroll_position" type="hidden" value="">
                 </form>
             </x-common.nav-link>
         @endforeach

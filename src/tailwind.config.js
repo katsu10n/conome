@@ -16,12 +16,23 @@ export default {
       },
       colors: {
         bc: '#fff',
-        main: '#FBA834',
-        mainLight: '#fec77a',
-        sub: '#387ADF',
-        subLight: '#50C4ED',
-        text: '#333',
-        textLight: '#7d7d7d',
+        main: {
+          DEFAULT: '#FF6600',
+          light: '#ff983f',
+          dark: '#ff4d00',
+        },
+        sub: {
+          DEFAULT: '#ffcc00',
+        },
+        text: {
+          DEFAULT: '#1d1f21',
+          light: '#444648',
+        },
+        gray: {
+          DEFAULT: '#cccccc',
+          light: '#f5f5f5',
+          dark: '#929292',
+        },
       },
     },
   },

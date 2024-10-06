@@ -16,12 +16,12 @@
 
 <body class="min-h-dvh bg-bc font-sans text-text antialiased">
     <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
-        <header class="sticky top-0 z-20 grid grid-cols-[18rem_minmax(0,1fr)_20rem] gap-8 bg-bc" id="main-header">
+        <header class="sticky top-0 z-20 grid grid-cols-[16rem_minmax(0,1fr)_20rem] gap-8 bg-bc" id="main-header">
             <div class="flex items-center justify-between">
                 <h1 class="py-4 text-lg font-bold"><a href="/">Conome</a></h1>
                 <x-users.user-nav-modal />
             </div>
-            <nav class="flex items-center overflow-hidden text-center text-sm font-medium text-gray-500">
+            <nav class="flex items-center overflow-hidden text-center">
                 @if (request()->routeIs('posts.index') ||
                         request()->routeIs('posts.category') ||
                         request()->routeIs('posts.followed') ||
@@ -38,7 +38,7 @@
             </div>
         </header>
 
-        <div class="grid grid-cols-[18rem_minmax(0,1fr)_20rem] gap-8">
+        <div class="grid grid-cols-[16rem_minmax(0,1fr)_20rem] gap-8">
             <div class="scrollbar-wrapper">
                 <div class="max-h-dvh sidebar scrollbar overflow-y-auto">
                     @include('layouts.sidebar-left')
