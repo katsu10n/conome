@@ -6,12 +6,7 @@
 @font-face {
   font-family: 'IBMPlexSansJP';
   src:
-    url('/fonts/IBMPlexSansJP/IBMPlexSansJP-Thin.ttf') format('ttf'),
-    url('/fonts/IBMPlexSansJP/IBMPlexSansJP-ExtraLight.ttf') format('ttf'),
-    url('/fonts/IBMPlexSansJP/IBMPlexSansJP-Light.ttf') format('ttf'),
     url('/fonts/IBMPlexSansJP/IBMPlexSansJP-Regular.ttf') format('ttf'),
-    url('/fonts/IBMPlexSansJP/IBMPlexSansJP-Medium.ttf') format('ttf'),
-    url('/fonts/IBMPlexSansJP/IBMPlexSansJP-SemiBold.ttf') format('ttf'),
     url('/fonts/IBMPlexSansJP/IBMPlexSansJP-Bold.ttf') format('ttf');
 }
 
