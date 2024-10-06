@@ -21,10 +21,12 @@
             </x-common.dropdown-link>
         @endif
 
-        <x-common.dropdown-link>
-            <x-icons.icon-other class="w-6" />
-            {{ __('＠ さんをフォローする（未）') }}
-        </x-common.dropdown-link>
+        @if ($post->user_id !== $currentUserId)
+            <x-common.dropdown-link>
+                <x-icons.icon-other class="w-6" />
+                {{ __('＠ さんをフォローする（未）') }}
+            </x-common.dropdown-link>
+        @endif
 
     </x-slot>
 </x-common.dropdown>

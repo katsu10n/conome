@@ -20,6 +20,8 @@
         @endif
     </nav>
     <div class="flex items-center">
-        <input class="w-full rounded-full bg-bc px-4 py-2" type="text" placeholder="検索（未実装）" />
+        <input
+            class="w-full rounded-full bg-bc px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-main"
+            type="text" placeholder="検索（未実装）" />
     </div>
 </header>
