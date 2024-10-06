@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function updateModalPosition() {
     const containerRect = container.getBoundingClientRect();
     const rightOffset = window.innerWidth - containerRect.right;
-    modalContainer.style.right = `${rightOffset + 16}px`;
+    modalContainer.style.right = `${rightOffset + 32}px`;
   }
 
   updateModalPosition();

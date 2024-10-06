@@ -2,7 +2,7 @@
 
 @php
     $baseClasses =
-        'gap-2 my-4 p-3 pb-2 grid grid-cols-[auto,1fr] grid-rows-[auto,1fr] rounded-xl border shadow-md transition-shadow duration-300';
+        'gap-2 my-4 p-3 pb-2 grid grid-cols-[auto,1fr] grid-rows-[auto,1fr] rounded-xl border shadow-md transition-shadow duration-200';
     $linkClasses = $isLink ? 'hover:bg-gray-50 hover:shadow-lg cursor-pointer' : '';
 @endphp
 

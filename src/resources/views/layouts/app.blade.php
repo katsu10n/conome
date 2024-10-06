@@ -33,7 +33,7 @@
                         </x-common.nav-link>
                     </ul>
                 </nav>
-                <div class="max-h-dvh scrollbar overflow-y-auto">
+                <div class="max-h-dvh scrollbar overflow-y-auto pb-40">
                     @include('layouts.sidebar-left')
                 </div>
             </div>
@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <div class="fixed bottom-4 z-50 w-52" id="modal-container">
+    <div class="fixed bottom-4 z-50 w-80" id="modal-container">
         <x-posts.post-form-modal />
     </div>
 

@@ -1,4 +1,4 @@
-<nav class="mb-8">
+<nav>
     <ul>
         <x-common.nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') &&
             !request()->route('category') &&
