@@ -1,8 +1,9 @@
 <header class="sticky top-0 z-20 grid grid-cols-[16rem_minmax(0,1fr)_20rem] gap-8 bg-bc" id="main-header">
-    <div class="-mt-1 flex items-center justify-between">
+    <div class="-mt-1 flex items-center">
         <h1 class="text-2xl font-bold"><a href="/">Conome</a></h1>
-        <div class="">
+        <div class="ml-auto flex items-center gap-4">
             <x-users.user-nav-modal />
+            <x-posts.post-form-modal-icon />
         </div>
     </div>
     <nav class="flex items-center overflow-hidden text-center">
