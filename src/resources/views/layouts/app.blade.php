@@ -14,7 +14,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-dvh bg-bc font-sans text-text antialiased">
+<body class="min-h-dvh bg-bc font-IBM text-text antialiased">
     <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
         @include('layouts.header')
 

@@ -13,7 +13,9 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+        IBM: ['IBMPlexSansJP', 'sans-serif'],
       },
+
       colors: {
         bc: '#fff',
         main: {
