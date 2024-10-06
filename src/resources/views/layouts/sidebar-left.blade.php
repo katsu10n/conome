@@ -1,6 +1,6 @@
 <nav class="mb-8">
     <ul>
-        <div class="border-b-2 border-slate-200">
+        <div class="border-b">
             <x-common.nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
                 <x-icons.icon-person />
                 プロフィール

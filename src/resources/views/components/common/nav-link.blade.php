@@ -5,7 +5,7 @@
         {{ $attributes->merge([
             'class' =>
                 'block flex w-full items-center gap-4 py-3 transition-all' .
-                ($active ? ' text-main font-bold hover:text-main' : ' border-transparent hover:text-main'),
+                ($active ? ' text-main font-bold hover:text-main' : ' hover:text-main'),
         ]) }}>
         {{ $slot }}
     </a>

@@ -2,7 +2,7 @@
     <x-common.dropdown align="right" width="w-48">
         <x-slot name="trigger">
             <button
-                class="inline-flex items-center gap-2 text-sm transition duration-150 ease-in-out hover:text-textLight focus:outline-none">
+                class="inline-flex items-center gap-2 text-sm transition duration-150 ease-in-out hover:text-main focus:outline-none">
 
                 <x-icons.icon-user class="h-6 w-6" />
                 <p class="max-w-36 truncate">{{ Auth::user()->name ?? 'ゲスト' }}</p>
