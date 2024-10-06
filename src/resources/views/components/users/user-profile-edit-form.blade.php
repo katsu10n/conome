@@ -17,7 +17,7 @@
     </div>
     <div class="flex justify-end space-x-2">
         <button
-            class="flex w-full justify-center gap-1 rounded-lg bg-main-light px-4 py-2 font-bold text-bc shadow-md transition duration-200 ease-in hover:bg-main"
+            class="flex w-full justify-center gap-1 rounded-lg bg-main-light px-4 py-2 font-bold text-bc shadow-md transition ease-in hover:bg-main"
             type="submit">
             <span>保存する</span>
             <x-icons.icon-save class="relative top-[3px] w-5" />
