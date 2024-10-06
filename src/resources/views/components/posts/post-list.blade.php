@@ -10,7 +10,7 @@
     data-post-url="{{ $isLink ? route('posts.show', ['uid' => $post->user->uid, 'post' => $post]) : '' }}">
     <a class="user-link row-span-2 block truncate font-bold hover:underline"
         href="{{ route('profile.show', $post->user->uid) }}">
-        <x-icons.icon-user class="h-12 w-12 text-gray-400" />
+        <x-icons.icon-user class="w-10 text-gray-400" />
     </a>
     <div class="flex min-w-0 flex-col">
         <div class="flex items-center justify-between gap-2">
@@ -45,7 +45,7 @@
     <div>
         <div class="flex items-end justify-between">
             <div class="mr-8 flex items-center gap-2">
-                <x-icons.icon-comment class="h-4 w-4" />
+                <x-icons.icon-comment class="w-5" />
                 <span>{{ $post->comments->count() }}</span>
             </div>
             <div class="mr-8 flex items-center">
@@ -53,7 +53,7 @@
                     class="like-button {{ $post->isLikedBy(Auth::user()) ? 'text-red-500 hover:text-red-600' : 'text-textLight hover:text-red-500' }} mr-2 flex items-center"
                     data-post-id="{{ $post->id }}"
                     data-liked="{{ $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}" type="button">
-                    <x-icons.icon-heart class="{{ $post->isLikedBy(Auth::user()) ? 'fill-current' : '' }}" />
+                    <x-icons.icon-heart class="{{ $post->isLikedBy(Auth::user()) ? 'fill-current' : '' }} w-6" />
                 </button>
                 <span class="like-count text-sm" data-post-id="{{ $post->id }}">{{ $post->likes->count() }}</span>
             </div>
