@@ -10,38 +10,40 @@
         </div>
     </div>
     <div class="mt-20 flex flex-col items-center">
-        <div>
+        <div class="flex gap-2">
             @if (Auth::id() !== $user->id)
                 <x-users.user-follow-button :user="$user" />
             @else
-                <button class="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                <button
+                    class="flex w-full justify-center gap-1 rounded-lg border border-gray px-4 py-2 font-bold shadow-md transition ease-in hover:bg-gray-light"
                     @click="editModalOpen = true">
-                    プロフィールを編集
+                    <span>プロフィールを編集</span>
+                    <x-icons.icon-pencil class="relative top-[5px] w-4" />
                 </button>
             @endif
         </div>
         <p class="mt-4 text-xl font-bold">{{ $user->name }}</p>
         <p>{{ '@' . $user->uid }}</p>
-        <p class="mt-2">{{ $user->content }}</p>
+        <p class="mt-2 text-text-light">{{ $user->content }}</p>
     </div>
     <div class="mb-3 mt-6 flex gap-14">
-        <div class="flex cursor-pointer flex-col items-center justify-center hover:text-gray-600" title="フォロワー"
+        <div class="group flex cursor-pointer flex-col items-center justify-center" title="フォロワー"
             @click="$dispatch('open-follower-modal')">
-            <p class="text-navy-700 text-xl font-bold">
-                {{ $user->followers->count() }}
-            </p>
-            <p>
-                フォロワー
-            </p>
+            <div class="text-center transition ease-in group-hover:opacity-70">
+                <p class="text-xl font-bold">
+                    {{ $user->followers->count() }}
+                </p>
+                <p class="text-text-light">フォロワー</p>
+            </div>
         </div>
-        <div class="flex cursor-pointer flex-col items-center justify-center hover:text-gray-400" title="フォロー中"
+        <div class="group flex cursor-pointer flex-col items-center justify-center" title="フォロー中"
             @click="$dispatch('open-following-modal')">
-            <p class="text-navy-700 text-xl font-bold">
-                {{ $user->following->count() }}
-            </p>
-            <p>
-                フォロー中
-            </p>
+            <div class="text-center transition ease-in group-hover:opacity-70">
+                <p class="text-xl font-bold">
+                    {{ $user->following->count() }}
+                </p>
+                <p class="text-text-light">フォロー中</p>
+            </div>
         </div>
     </div>
 

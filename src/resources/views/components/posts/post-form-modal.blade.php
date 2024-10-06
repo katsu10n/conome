@@ -1,8 +1,9 @@
 <div x-data="{ open: false }" @keydown.escape="open = false">
     <button
-        class="text-whiteshadow-md w-full rounded-full bg-main px-6 py-4 text-center text-base font-semibold text-bc transition duration-200 ease-in hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200"
+        class="flex w-full justify-center gap-1 rounded-full bg-main-light px-6 py-4 text-base font-bold text-bc transition ease-in hover:bg-main focus:outline-none focus:ring-2 focus:ring-main focus:ring-offset-2 focus:ring-offset-gray-light"
         type="button" @click="open = !open">
-        投稿する
+        <span>投稿する</span>
+        <x-icons.icon-pencil class="relative top-[5px] w-4" />
     </button>
 
     <x-common.modal-card title="投稿を作成" open="open">

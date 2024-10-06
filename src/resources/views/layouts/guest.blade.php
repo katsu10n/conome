@@ -8,19 +8,22 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
     <link href="https://fonts.bunny.net" rel="preconnect">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
     <div class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
-        <div>
-            <a class="border-b-4 border-black text-3xl" href="posts">投稿一覧</a>
-        </div>
+        {{-- <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <input id="email" name="email" type="hidden" type="email" :value="'1@1'" autofocus
+                autocomplete="username" />
+            <input id="password" name="password" type="hidden" type="password" value="a"
+                autocomplete="current-password" />
+            <button class="border-b-4 border-black text-3xl" type="submit">テストユーザーでログイン</button>
+        </form> --}}
 
         <div class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
             {{ $slot }}

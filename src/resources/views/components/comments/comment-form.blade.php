@@ -1,7 +1,12 @@
-<div class="container mx-auto px-4">
-    <form class="mt-4" action="{{ route('comments.store', $post) }}" method="POST">
-        @csrf
-        <textarea class="w-full rounded border p-2" name="content" rows="3" placeholder="コメントを入力してください"></textarea>
-        <button class="mt-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" type="submit">コメントする</button>
-    </form>
-</div>
+<form class="grid w-full grid-cols-[1fr] gap-2" action="{{ route('comments.store', $post) }}" method="POST">
+    @csrf
+    <textarea
+        class="w-full flex-1 resize-none appearance-none rounded-lg border border-gray px-4 py-2 placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-text-light"
+        id="content" name="content" placeholder="内容" rows="4" required></textarea>
+    <button
+        class="flex w-full justify-center gap-1 rounded-lg bg-text-light px-4 py-2 font-bold text-bc shadow-md transition ease-in hover:bg-text"
+        type="submit">
+        <span>コメントする</span>
+        <x-icons.icon-comment class="relative top-[3px] w-5" />
+    </button>
+</form>

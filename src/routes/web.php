@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FollowController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use PharIo\Manifest\AuthorCollectionIterator;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -15,6 +17,10 @@ Route::get('/', function () {
     }
     return view('auth.login');
 });
+
+Route::post('/test-login', [AuthenticatedSessionController::class, 'login'])->name('test-login');
+
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/settings', [ProfileController::class, 'edit'])->name('profile.edit');

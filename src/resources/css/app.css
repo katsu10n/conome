@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* フォント */
+@font-face {
+  font-family: 'IBMPlexSansJP';
+  src:
+    url('/fonts/IBMPlexSansJP/IBMPlexSansJP-Regular.ttf') format('ttf'),
+    url('/fonts/IBMPlexSansJP/IBMPlexSansJP-Bold.ttf') format('ttf');
+}
+
+/* スクロールバー */
 .scrollbar::-webkit-scrollbar {
-  width: 7px;
+  width: 6px;
 }
 
 .scrollbar::-webkit-scrollbar-track {
@@ -17,5 +26,5 @@
 }
 
 .scroll-hover .scrollbar::-webkit-scrollbar-thumb {
-  background-color: #fec77a;
+  background-color: #ff983f;
 }
