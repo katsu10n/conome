@@ -1,14 +1,16 @@
-# Conome
+# Conome（コノミー）
+
+「好き」を共有する SNS
 
 https://conome-4e6d09dc0d5e.herokuapp.com/
 
 ## 1. アプリ概要
 
-### 説明
-
-「好き」を共有する SNS
+準備中...
 
 ## 2. アプリの使い方
+
+準備中...
 
 ## 3. 要件定義
 
@@ -96,16 +98,28 @@ https://conome-4e6d09dc0d5e.herokuapp.com/
 
 ## 4. URI 設計
 
-| メソッド | URI           | 説明               |
-| -------- | ------------- | ------------------ |
-| GET      | /             | トップページ       |
-| GET      | /login        | ログインページ     |
-| GET      | /register     | 新規登録ページ     |
-| GET      | /posts        | 投稿一覧ページ     |
-| GET      | /posts/{id}   | 投稿詳細ページ     |
-|          | /posts/create |                    |
-|          | /posts/update |                    |
-| GET      | /profile      | プロフィールページ |
+| メソッド | URI                         | 説明                                   |
+| -------- | --------------------------- | -------------------------------------- |
+| GET      | /                           | トップ                                 |
+| GET      | /login                      | ログイン                               |
+| GET      | /register                   | 新規登録                               |
+| GET      | /settings                   | アカウント設定                         |
+| GET      | /{uid}                      | プロフィール                           |
+| GET      | /{uid}/comments             | プロフィールのコメントした投稿一覧     |
+| GET      | /{uid}/likes                | プロフィールのいいねした投稿一覧       |
+| GET      | /posts                      | 投稿一覧                               |
+| GET      | /posts/followed             | フォローユーザーの投稿一覧             |
+| GET      | /{uid}/posts/{id}           | 投稿詳細                               |
+| POST     | /posts                      | 投稿作成                               |
+| DELETE   | /posts/{id}                 | 投稿削除                               |
+| GET      | /categories/{slug}          | カテゴリー別投稿一覧                   |
+| GET      | /categories/{slug}/followed | フォローユーザーのカテゴリー別投稿一覧 |
+| POST     | /posts/{id}/comments        | 投稿へのコメント                       |
+| DELETE   | /comments/{id}              | 投稿へのコメントの削除                 |
+| POST     | /categories/{id}/favorite   | カテゴリーのお気に入り                 |
+| POST     | /posts/{id}/like            | 投稿へのいいね                         |
+| POST     | /follow/{user_id}           | ユーザーフォロー                       |
+| DELETE   | /unfollow/{user_id}         | ユーザーフォロー解除                   |
 
 ## 5. データベース設計
 
@@ -135,8 +149,9 @@ https://conome-4e6d09dc0d5e.herokuapp.com/
   | --- | ------------- | ---------- | ----------- | --- | -------- | ------ | -------------- |
   | 1   | カテゴリー ID | id         | integer     | PK  | O        |        | AUTO_INCREMENT |
   | 2   | 名前          | name       | text        |     | O        |        |                |
-  | 3   | 作成日時      | created_at | timestamptz |     | O        |        |                |
-  | 4   | 更新日時      | updated_at | timestamptz |     | O        |        |                |
+  | 3   | スラグ        | slug       | text        |     | O        |        |                |
+  | 4   | 作成日時      | created_at | timestamptz |     | O        |        |                |
+  | 5   | 更新日時      | updated_at | timestamptz |     | O        |        |                |
 
 - **投稿(posts)**
 
@@ -232,7 +247,11 @@ post_hashtag }o--|| hashtags: ""
 
 ## 6. システム構成図
 
+準備中...
+
 ## 7. 使用技術
+
+準備中...
 
 ### 言語
 
