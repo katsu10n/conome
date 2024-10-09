@@ -1,10 +1,18 @@
 <x-guest-layout>
+    <div class="mb-4 text-center">
+        <h1 class="mb-1 flex items-center justify-center gap-2 text-3xl font-bold">Conome</h1>
+        <h2 class="text-lg">「好き」を共有するSNS</h2>
+    </div>
     <form action="{{ route('test-login') }}" method="POST">
         @csrf
-        <button class="mb-8 w-full border-b-4 border-black text-3xl" type="submit">テストユーザーでログイン</button>
+        <button
+            class="flex w-full justify-center gap-1 rounded-lg bg-main-light px-4 py-2 font-bold text-bc shadow-md transition duration-200 ease-in hover:bg-main"
+            type="submit">
+            <span>テストユーザーでログイン</span>
+        </button>
     </form>
 
-    <form method="POST" action="{{ route('login') }}">
+    {{-- <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <div>
@@ -34,7 +42,7 @@
         <div class="mt-4 flex items-center justify-end">
             @if (Route::has('password.request'))
                 <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    {{-- href="{{ route('password.request') }}" --}}>
+                    href="{{ route('password.request') }}">
                     {{ __('パスワードを忘れましたか？') }}
                 </a>
             @endif
@@ -43,5 +51,5 @@
                 {{ __('ログイン') }}
             </x-primary-button>
         </div>
-    </form>
+    </form> --}}
 </x-guest-layout>

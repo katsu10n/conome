@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Conome') }} -「好き」を共有するSNS</title>
     <link type="image/png" href="{{ asset('images/logo.png') }}" rel="icon">
 
     <link href="https://fonts.bunny.net" rel="preconnect">
@@ -16,11 +16,14 @@
 </head>
 
 <body class="min-h-dvh list-none bg-bc font-IBM text-text antialiased">
+    <div class="loading">
+        <div></div>
+    </div>
     <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
         @include('layouts.header')
 
-        <div class="grid grid-cols-[16rem_minmax(0,1fr)_20rem] gap-8">
-            <div class="scrollbar-wrapper sidebar">
+        <div class="grid grid-cols-[15rem_minmax(0,1fr)_20rem] gap-8">
+            <div class="scrollbar-wrapper sidebar mt-2">
                 <nav class="border-b">
                     <ul>
                         <x-common.nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">

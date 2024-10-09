@@ -1,4 +1,4 @@
-<div class="mb-24">
+<div class="mb-24 pt-4">
     <h2 class="mb-4 text-lg font-semibold">人気の投稿</h2>
 
     <div class="mb-6">

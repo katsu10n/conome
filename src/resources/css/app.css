@@ -20,11 +20,71 @@
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 10px;
-  border: 2px solid #ffffff;
+  border: 2px solid #fff;
 }
 
 .scroll-hover .scrollbar::-webkit-scrollbar-thumb {
   background-color: #ff983f;
+}
+
+/* ローディングアニメーション */
+.loading {
+  z-index: 999;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100svw;
+  height: 100svh;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  cursor: progress;
+  animation: fadeOut 0.8s 0.4s forwards;
+
+  &::after,
+  &::before,
+  div {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: #ff983f;
+    border-radius: 50%;
+    animation: bouncing 0.6s infinite alternate;
+  }
+
+  &::after,
+  &::before,
+  div {
+    content: '';
+  }
+  div {
+    margin: 0 5px;
+  }
+  div {
+    animation-delay: 0.2s;
+  }
+  &::after {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes bouncing {
+  to {
+    opacity: 0.1;
+    transform: translate3d(0, -16px, 0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
