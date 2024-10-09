@@ -23,7 +23,7 @@
         @include('layouts.header')
 
         <div class="grid grid-cols-[16rem_minmax(0,1fr)_20rem] gap-8">
-            <div class="scrollbar-wrapper sidebar">
+            <div class="scrollbar-wrapper sidebar mt-2">
                 <nav class="border-b">
                     <ul>
                         <x-common.nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
