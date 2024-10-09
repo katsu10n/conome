@@ -94,7 +94,7 @@ https://conome-4e6d09dc0d5e.herokuapp.com/
 **可用性**
 
 - 24 時間 365 日の安定稼働
-- バックアップ
+- データのバックアップ
 
 ## 4. URI 設計
 
@@ -127,104 +127,106 @@ https://conome-4e6d09dc0d5e.herokuapp.com/
 
 ### テーブル詳細
 
-- **ユーザー (users)**
+<details>
+<summary>ユーザー (users)</summary>
 
-  | #   | 論理名             | 物理名            | データ型     | Key | Not NULL | 初期値 | 備考           |
-  | --- | ------------------ | ----------------- | ------------ | --- | -------- | ------ | -------------- |
-  | 1   | ユーザー ID        | id                | bigint       | PK  | O        |        | AUTO_INCREMENT |
-  | 2   | アカウント ID      | uid               | text         | UK  | O        |        |                |
-  | 3   | 表示名             | name              | text         |     | O        |        |                |
-  | 4   | 自己紹介           | content           | text         |     |          | NULL   |                |
-  | 5   | 生年月日           | birthday          | date         |     |          | NULL   |                |
-  | 6   | メールアドレス     | email             | varchar(255) | UK  | O        |        |                |
-  | 7   | メールアドレス認証 | email_verified_at | timestamp    |     |          | NULL   |                |
-  | 8   | パスワード         | password          | varchar(255) |     | O        |        |                |
-  | 9   | パスワードトークン | remember_token    | varchar(100) |     |          | NULL   |                |
-  | 10  | 作成日時           | created_at        | timestamptz  |     | O        |        |                |
-  | 11  | 更新日時           | updated_at        | timestamptz  |     | O        |        |                |
+| #   | 論理名             | 物理名            | データ型     | Key | Not NULL | 初期値 | 備考           |
+| --- | ------------------ | ----------------- | ------------ | --- | -------- | ------ | -------------- |
+| 1   | ユーザー ID        | id                | bigint       | PK  | O        |        | AUTO_INCREMENT |
+| 2   | アカウント ID      | uid               | text         | UK  | O        |        |                |
+| 3   | 表示名             | name              | text         |     | O        |        |                |
+| 4   | 自己紹介           | content           | text         |     |          | NULL   |                |
+| 5   | 生年月日           | birthday          | date         |     |          | NULL   |                |
+| 6   | メールアドレス     | email             | varchar(255) | UK  | O        |        |                |
+| 7   | メールアドレス認証 | email_verified_at | timestamp    |     |          | NULL   |                |
+| 8   | パスワード         | password          | varchar(255) |     | O        |        |                |
+| 9   | パスワードトークン | remember_token    | varchar(100) |     |          | NULL   |                |
+| 10  | 作成日時           | created_at        | timestampsTz |     | O        |        |                |
+| 11  | 更新日時           | updated_at        | timestampsTz |     | O        |        |                |
 
-- **カテゴリー(categories)**
+</details>
 
-  | #   | 論理名        | 物理名     | データ型    | Key | Not Null | 初期値 | 備考           |
-  | --- | ------------- | ---------- | ----------- | --- | -------- | ------ | -------------- |
-  | 1   | カテゴリー ID | id         | integer     | PK  | O        |        | AUTO_INCREMENT |
-  | 2   | 名前          | name       | text        |     | O        |        |                |
-  | 3   | スラグ        | slug       | text        |     | O        |        |                |
-  | 4   | 作成日時      | created_at | timestamptz |     | O        |        |                |
-  | 5   | 更新日時      | updated_at | timestamptz |     | O        |        |                |
+<details>
+<summary>カテゴリー(categories)</summary>
 
-- **投稿(posts)**
+| #   | 論理名        | 物理名     | データ型     | Key | Not Null | 初期値 | 備考           |
+| --- | ------------- | ---------- | ------------ | --- | -------- | ------ | -------------- |
+| 1   | カテゴリー ID | id         | integer      | PK  | O        |        | AUTO_INCREMENT |
+| 2   | 名前          | name       | text         |     | O        |        |                |
+| 3   | スラグ        | slug       | text         |     | O        |        |                |
+| 4   | 作成日時      | created_at | timestampsTz |     | O        |        |                |
+| 5   | 更新日時      | updated_at | timestampsTz |     | O        |        |                |
 
-  | #   | 論理名        | 物理名      | データ型    | Key | Not Null | 初期値 | 備考           |
-  | --- | ------------- | ----------- | ----------- | --- | -------- | ------ | -------------- |
-  | 1   | 投稿 ID       | id          | bigint      | PK  | O        |        | AUTO_INCREMENT |
-  | 2   | ユーザー ID   | user_id     | bigint      | FK  | O        |        |                |
-  | 3   | カテゴリー ID | category_id | integer     | FK  | O        |        |                |
-  | 4   | タイトル      | title       | text        |     | O        |        |                |
-  | 5   | 内容          | content     | text        |     | O        |        |                |
-  | 6   | アーカイブ    | is_archived | boolean     |     |          |        |                |
-  | 7   | 作成日時      | created_at  | timestamptz |     | O        |        |                |
-  | 8   | 更新日時      | updated_at  | timestamptz |     | O        |        |                |
+</details>
 
-- **コメント (comments)**
+<details>
+<summary>投稿(posts)</summary>
 
-  | #   | 論理名      | 物理名     | データ型    | Key | Not Null | 初期値 | 備考           |
-  | --- | ----------- | ---------- | ----------- | --- | -------- | ------ | -------------- |
-  | 1   | コメント ID | id         | bigint      | PK  | O        |        | AUTO_INCREMENT |
-  | 2   | ユーザー ID | user_id    | bigint      | FK  | O        |        |                |
-  | 3   | 投稿 ID     | post_id    | bigint      | FK  | O        |        |                |
-  | 4   | 内容        | content    | text        |     | O        |        |                |
-  | 5   | 作成日時    | created_at | timestamptz |     | O        |        |                |
-  | 6   | 更新日時    | updated_at | timestamptz |     | O        |        |                |
+| #   | 論理名        | 物理名      | データ型     | Key | Not Null | 初期値 | 備考           |
+| --- | ------------- | ----------- | ------------ | --- | -------- | ------ | -------------- |
+| 1   | 投稿 ID       | id          | bigint       | PK  | O        |        | AUTO_INCREMENT |
+| 2   | ユーザー ID   | user_id     | bigint       | FK  | O        |        |                |
+| 3   | カテゴリー ID | category_id | integer      | FK  | O        |        |                |
+| 4   | タイトル      | title       | text         |     | O        |        |                |
+| 5   | 内容          | content     | text         |     | O        |        |                |
+| 6   | アーカイブ    | is_archived | boolean      |     |          | NULL   |                |
+| 7   | 作成日時      | created_at  | timestampsTz |     | O        |        |                |
+| 8   | 更新日時      | updated_at  | timestampsTz |     | O        |        |                |
 
-- **いいね (likes)**
+</details>
 
-  | #   | 論理名      | 物理名     | データ型    | Key | Not Null | 初期値 | 備考           |
-  | --- | ----------- | ---------- | ----------- | --- | -------- | ------ | -------------- |
-  | 1   | いいね ID   | id         | bigint      | PK  | O        |        | AUTO_INCREMENT |
-  | 2   | ユーザー ID | user_id    | bigint      | FK  | O        |        |                |
-  | 3   | 投稿 ID     | post_id    | bigint      | FK  | O        |        |                |
-  | 4   | 作成日時    | created_at | timestamptz |     | O        |        |                |
-  | 5   | 更新日時    | updated_at | timestamptz |     | O        |        |                |
+<details>
+<summary>コメント (comments)</summary>
 
-- **お気に入り (favorites)**
+| #   | 論理名      | 物理名     | データ型     | Key | Not Null | 初期値 | 備考           |
+| --- | ----------- | ---------- | ------------ | --- | -------- | ------ | -------------- |
+| 1   | コメント ID | id         | bigint       | PK  | O        |        | AUTO_INCREMENT |
+| 2   | ユーザー ID | user_id    | bigint       | FK  | O        |        |                |
+| 3   | 投稿 ID     | post_id    | bigint       | FK  | O        |        |                |
+| 4   | 内容        | content    | text         |     | O        |        |                |
+| 5   | 作成日時    | created_at | timestampsTz |     | O        |        |                |
+| 6   | 更新日時    | updated_at | timestampsTz |     | O        |        |                |
 
-  | #   | 論理名        | 物理名      | データ型    | Key | Not Null | 初期値 | 備考           |
-  | --- | ------------- | ----------- | ----------- | --- | -------- | ------ | -------------- |
-  | 1   | お気に入り ID | id          | bigint      | PK  | O        |        | AUTO_INCREMENT |
-  | 2   | ユーザー ID   | user_id     | bigint      | FK  | O        |        |                |
-  | 3   | カテゴリー ID | category_id | integer     | FK  | O        |        |                |
-  | 4   | 作成日時      | created_at  | timestamptz |     | O        |        |                |
-  | 5   | 更新日時      | updated_at  | timestamptz |     | O        |        |                |
+</details>
 
-- **フォロー (follows)**
+<details>
+<summary>いいね (likes)</summary>
 
-  | #   | 論理名                          | 物理名      | データ型    | Key | Not Null | 初期値 | 備考           |
-  | --- | ------------------------------- | ----------- | ----------- | --- | -------- | ------ | -------------- |
-  | 1   | ID                              | id          | bigint      | PK  | O        |        | AUTO_INCREMENT |
-  | 2   | フォローしているユーザーの ID   | follower_id | bigint      |     | O        |        |                |
-  | 3   | フォローされているユーザーの ID | followed_id | bigint      |     | O        |        |                |
-  | 4   | 作成日時                        | created_at  | timestamptz |     | O        |        |                |
-  | 5   | 更新日時                        | updated_at  | timestamptz |     | O        |        |                |
+| #   | 論理名      | 物理名     | データ型     | Key | Not Null | 初期値 | 備考           |
+| --- | ----------- | ---------- | ------------ | --- | -------- | ------ | -------------- |
+| 1   | いいね ID   | id         | bigint       | PK  | O        |        | AUTO_INCREMENT |
+| 2   | ユーザー ID | user_id    | bigint       | FK  | O        |        |                |
+| 3   | 投稿 ID     | post_id    | bigint       | FK  | O        |        |                |
+| 4   | 作成日時    | created_at | timestampsTz |     | O        |        |                |
+| 5   | 更新日時    | updated_at | timestampsTz |     | O        |        |                |
 
-- **ハッシュタグ (hashtags)**
+</details>
 
-  | #   | Key | 論理名          | 物理名     | データ型    | Not Null | 初期値 | 備考           |
-  | --- | --- | --------------- | ---------- | ----------- | -------- | ------ | -------------- |
-  | 1   | PK  | ハッシュタグ ID | id         | bigint      | O        |        | AUTO_INCREMENT |
-  |     |     | 名前            | name       | text        | O        |        |                |
-  |     |     | 作成日時        | created_at | timestamptz | O        |        |                |
-  |     |     | 更新日時        | updated_at | timestamptz | O        |        |                |
+<details>
+<summary>お気に入り (favorites)</summary>
 
-- **ハッシュタグ・投稿 (hashtag_post)**
+| #   | 論理名        | 物理名      | データ型     | Key | Not Null | 初期値 | 備考           |
+| --- | ------------- | ----------- | ------------ | --- | -------- | ------ | -------------- |
+| 1   | お気に入り ID | id          | bigint       | PK  | O        |        | AUTO_INCREMENT |
+| 2   | ユーザー ID   | user_id     | bigint       | FK  | O        |        |                |
+| 3   | カテゴリー ID | category_id | integer      | FK  | O        |        |                |
+| 4   | 作成日時      | created_at  | timestampsTz |     | O        |        |                |
+| 5   | 更新日時      | updated_at  | timestampsTz |     | O        |        |                |
 
-  | #   | Key | 論理名          | 物理名     | データ型    | Not Null | 初期値 | 備考           |
-  | --- | --- | --------------- | ---------- | ----------- | -------- | ------ | -------------- |
-  | 1   | PK  | ID              | id         | bigint      | O        |        | AUTO_INCREMENT |
-  |     | FK  | 投稿 ID         | post_id    | text        | O        |        |                |
-  |     | FK  | ハッシュタグ ID | hashtag_id | bigint      | O        |        |                |
-  |     |     | 作成日時        | created_at | timestamptz | O        |        |                |
-  |     |     | 更新日時        | updated_at | timestamptz | O        |        |                |
+</details>
+
+<details>
+<summary>フォロー (follows)</summary>
+
+| #   | 論理名                          | 物理名      | データ型     | Key | Not Null | 初期値 | 備考           |
+| --- | ------------------------------- | ----------- | ------------ | --- | -------- | ------ | -------------- |
+| 1   | ID                              | id          | bigint       | PK  | O        |        | AUTO_INCREMENT |
+| 2   | フォローしているユーザーの ID   | follower_id | bigint       |     | O        |        |                |
+| 3   | フォローされているユーザーの ID | followed_id | bigint       |     | O        |        |                |
+| 4   | 作成日時                        | created_at  | timestampsTz |     | O        |        |                |
+| 5   | 更新日時                        | updated_at  | timestampsTz |     | O        |        |                |
+
+</details>
 
 ### ER 図
 
@@ -241,8 +243,6 @@ categories ||--o{ posts: ""
 categories ||--o{ favorites: ""
 posts ||--o{ comments: ""
 posts ||--o{ likes: ""
-posts ||--o{ post_hashtag: ""
-post_hashtag }o--|| hashtags: ""
 ```
 
 ## 6. システム構成図
@@ -256,15 +256,17 @@ post_hashtag }o--|| hashtags: ""
 ### 言語
 
 - PHP
+- JavaScript
 
 ### フレームワーク
 
 - Laravel
 - Tailwind CSS
-- Next.js（Blade から移行予定）
+- Next.js（Laravel Blade から移行予定）
 
 ### ライブラリ
 
+- Laravel Breeze
 - Alpine.js
 
 ### データベース
@@ -280,10 +282,6 @@ post_hashtag }o--|| hashtags: ""
 - Heroku
 - Vercel（Next.js 移行時のフロント側）
 
-### CI / CD
-
--
-
 ### 開発環境
 
 - Docker
@@ -291,3 +289,4 @@ post_hashtag }o--|| hashtags: ""
 - GitHub
 - pgAdmin4
 - Visual Studio Code
+- Mermaid
