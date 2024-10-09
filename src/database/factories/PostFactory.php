@@ -25,10 +25,10 @@ class PostFactory extends Factory
         $updatedAt = $this->faker->dateTimeBetween($createdAt, 'now');
 
         return [
-            'user_id' => random_int(1, 8),
-            'category_id' => random_int(1, 8),
-            'title' => 'タイトル' . self::$num,
-            'content' => '内容' . self::$num,
+            'user_id' => random_int(1, 20),
+            'category_id' => random_int(1, 24),
+            'title' => '投稿タイトル' . self::$num,
+            'content' => '投稿内容' . self::$num,
             'created_at' => $createdAt,
             'updated_at' => $updatedAt,
         ];
