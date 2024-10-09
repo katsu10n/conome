@@ -16,6 +16,9 @@
 </head>
 
 <body class="min-h-dvh list-none bg-bc font-IBM text-text antialiased">
+    <div class="loading">
+        <div></div>
+    </div>
     <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
         @include('layouts.header')
 
