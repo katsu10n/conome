@@ -17,6 +17,9 @@
 
 <body class="font-IBM text-text antialiased">
     <div class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
+        <div class="loading">
+            <div></div>
+        </div>
         {{-- <form method="POST" action="{{ route('login') }}">
             @csrf
             <input id="email" name="email" type="hidden" type="email" :value="'1@1'" autofocus
