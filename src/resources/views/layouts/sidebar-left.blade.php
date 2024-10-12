@@ -1,10 +1,5 @@
 <nav>
     <ul>
-        <x-common.nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') &&
-            !request()->route('category') &&
-            !request()->routeIs('posts.show')">
-            すべて
-        </x-common.nav-link>
         @foreach ($categories as $category)
             @php
                 $isCategoryActive =

@@ -33,6 +33,12 @@
             <div class="scrollbar-wrapper sidebar mt-2 hidden md:block">
                 <nav class="border-b">
                     <ul>
+                        <x-common.nav-link href="{{ route('posts.index') }}" :active="!request()->routeIs('profile.*') &&
+                            !request()->route('category') &&
+                            !request()->routeIs('posts.show')">
+                            <x-icons.icon-home class="w-6" />
+                            ホーム
+                        </x-common.nav-link>
                         <x-common.nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
                             <x-icons.icon-person class="w-6" />
                             プロフィール
