@@ -19,11 +19,12 @@
     <div class="loading">
         <div></div>
     </div>
-    <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
+    <div class="relative mx-auto max-w-screen-xl px-4 sm:px-6 md:mb-16 md:px-8" id="container">
         @include('layouts.header')
 
-        <div class="grid grid-cols-[15rem_minmax(0,1fr)] gap-8 xl:grid-cols-[15rem_minmax(0,1fr)_20rem]">
-            <div class="scrollbar-wrapper sidebar mt-2">
+        <div
+            class="grid grid-cols-1 md:grid-cols-[15rem_minmax(0,1fr)] md:gap-8 lg:grid-cols-[15rem_minmax(0,1fr)_16rem] xl:grid-cols-[15rem_minmax(0,1fr)_20rem]">
+            <div class="scrollbar-wrapper sidebar mt-2 hidden md:block">
                 <nav class="border-b">
                     <ul>
                         <x-common.nav-link :href="route('profile.show', Auth::user()->uid)" :active="request()->routeIs('profile.*') && request()->route('uid') == Auth::user()->uid">
@@ -41,11 +42,11 @@
                 </div>
             </div>
 
-            <main class="min-w-0">
+            <main class="min-h-dvh min-w-0">
                 {{ $slot }}
             </main>
 
-            <div class="scrollbar-wrapper hidden xl:block">
+            <div class="scrollbar-wrapper hidden lg:block">
                 <div class="max-h-dvh sidebar scrollbar overflow-y-auto">
                     @include('layouts.sidebar-right')
                 </div>
@@ -53,7 +54,11 @@
         </div>
     </div>
 
-    <div class="fixed bottom-4 z-50 w-80" id="modal-container">
+    <div class="sticky bottom-0 md:hidden">
+        @include('layouts.footer')
+    </div>
+
+    <div class="fixed bottom-16 right-4 z-50 md:bottom-4 md:w-40 lg:w-64 xl:w-80" id="modal-container">
         <x-posts.post-form-modal />
     </div>
 

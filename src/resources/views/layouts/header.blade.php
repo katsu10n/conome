@@ -1,7 +1,7 @@
 <header
-    class="sticky top-0 z-20 grid grid-cols-[15rem_minmax(0,1fr)] gap-8 bg-bc xl:grid-cols-[15rem_minmax(0,1fr)_20rem]"
+    class="sticky top-0 z-20 grid bg-bc md:grid-cols-[15rem_minmax(0,1fr)] md:gap-8 lg:grid-cols-[15rem_minmax(0,1fr)_16rem] xl:grid-cols-[15rem_minmax(0,1fr)_20rem]"
     id="main-header">
-    <div class="-mt-1 flex items-center">
+    <div class="-mt-1 hidden items-center md:flex">
         <h1 class="pt-1 text-2xl font-bold"><a href="/"><img class="h-auto w-12" src="{{ asset('images/logo.png') }}"
                     alt="Logo"></a></h1>
         <div class="ml-auto flex items-center gap-4">
@@ -21,7 +21,7 @@
             </div>
         @endif
     </nav>
-    <div class="hidden items-center xl:flex">
+    <div class="hidden items-center lg:flex">
         <input
             class="w-full rounded-full bg-bc px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-main"
             type="text" placeholder="検索（未実装）" />
