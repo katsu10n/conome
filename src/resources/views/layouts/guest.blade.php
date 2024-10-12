@@ -16,18 +16,11 @@
 </head>
 
 <body class="font-IBM text-text antialiased">
-    <div class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
+    <div
+        class="flex min-h-screen flex-col place-content-center items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
         <div class="loading">
             <div></div>
         </div>
-        {{-- <form method="POST" action="{{ route('login') }}">
-            @csrf
-            <input id="email" name="email" type="hidden" type="email" :value="'1@1'" autofocus
-                autocomplete="username" />
-            <input id="password" name="password" type="hidden" type="password" value="a"
-                autocomplete="current-password" />
-            <button class="border-b-4 border-black text-3xl" type="submit">テストユーザーでログイン</button>
-        </form> --}}
 
         <div class="max-w-72 mt-6 w-full overflow-hidden rounded-lg bg-white px-6 py-4 shadow-md">
             {{ $slot }}
