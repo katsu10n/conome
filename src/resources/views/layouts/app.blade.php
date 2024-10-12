@@ -22,7 +22,7 @@
     <div class="relative mx-auto mb-16 max-w-screen-xl px-8" id="container">
         @include('layouts.header')
 
-        <div class="grid grid-cols-[15rem_minmax(0,1fr)_20rem] gap-8">
+        <div class="grid grid-cols-[15rem_minmax(0,1fr)] gap-8 xl:grid-cols-[15rem_minmax(0,1fr)_20rem]">
             <div class="scrollbar-wrapper sidebar mt-2">
                 <nav class="border-b">
                     <ul>
@@ -45,7 +45,7 @@
                 {{ $slot }}
             </main>
 
-            <div class="scrollbar-wrapper">
+            <div class="scrollbar-wrapper hidden xl:block">
                 <div class="max-h-dvh sidebar scrollbar overflow-y-auto">
                     @include('layouts.sidebar-right')
                 </div>

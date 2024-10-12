@@ -1,4 +1,6 @@
-<header class="sticky top-0 z-20 grid grid-cols-[15rem_minmax(0,1fr)_20rem] gap-8 bg-bc" id="main-header">
+<header
+    class="sticky top-0 z-20 grid grid-cols-[15rem_minmax(0,1fr)] gap-8 bg-bc xl:grid-cols-[15rem_minmax(0,1fr)_20rem]"
+    id="main-header">
     <div class="-mt-1 flex items-center">
         <h1 class="pt-1 text-2xl font-bold"><a href="/"><img class="h-auto w-12" src="{{ asset('images/logo.png') }}"
                     alt="Logo"></a></h1>
@@ -19,7 +21,7 @@
             </div>
         @endif
     </nav>
-    <div class="flex items-center">
+    <div class="hidden items-center xl:flex">
         <input
             class="w-full rounded-full bg-bc px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-main"
             type="text" placeholder="検索（未実装）" />
