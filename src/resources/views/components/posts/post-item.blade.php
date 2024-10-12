@@ -20,18 +20,25 @@
                     {{ $post->user->name }}
                 </a>
             </div>
-            <div class="relative ml-auto inline-block whitespace-nowrap text-sm">
-                <div class="absolute inset-0 flex text-text-light">
-                    <svg height="100%" viewBox="0 0 50 100">
-                        <path
-                            d="M49.9,0a17.1,17.1,0,0,0-12,5L5,37.9A17,17,0,0,0,5,62L37.9,94.9a17.1,17.1,0,0,0,12,5ZM25.4,59.4a9.5,9.5,0,1,1,9.5-9.5A9.5,9.5,0,0,1,25.4,59.4Z"
-                            fill="currentColor" />
-                    </svg>
-                    <div class="-ml-px h-full flex-grow rounded-md rounded-l-none bg-text-light"></div>
-                </div>
-                <span class="relative pr-px font-bold uppercase text-bc">
-                    <span>&emsp;{{ $post->category->name }}&nbsp;</span>
-                </span>
+            <div class="group relative ml-auto inline-block whitespace-nowrap text-sm">
+                <a
+                    href="{{ request()->routeIs('posts.followed') || request()->routeIs('posts.category.followed')
+                        ? route('posts.category.followed', $post->category->slug)
+                        : route('posts.category', $post->category->slug) }}">
+                    <div class="absolute inset-0 flex text-text-light transition ease-out group-hover:text-main-light">
+                        <svg height="100%" viewBox="0 0 50 100">
+                            <path
+                                d="M49.9,0a17.1,17.1,0,0,0-12,5L5,37.9A17,17,0,0,0,5,62L37.9,94.9a17.1,17.1,0,0,0,12,5ZM25.4,59.4a9.5,9.5,0,1,1,9.5-9.5A9.5,9.5,0,0,1,25.4,59.4Z"
+                                fill="currentColor" />
+                        </svg>
+                        <div
+                            class="-ml-px h-full flex-grow rounded-md rounded-l-none bg-text-light transition ease-out group-hover:bg-main-light">
+                        </div>
+                    </div>
+                    <span class="relative pr-px font-bold uppercase text-bc">
+                        <span>&emsp;{{ $post->category->name }}&nbsp;</span>
+                    </span>
+                </a>
             </div>
         </div>
         <div class="min-w-0">
