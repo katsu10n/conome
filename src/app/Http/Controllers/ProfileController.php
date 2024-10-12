@@ -37,7 +37,11 @@ class ProfileController extends Controller
             $user->email_verified_at = null;
         }
 
-        $user->save();
+        if ($user->id === 1) {
+            return redirect()->back();
+        } else {
+            $user->save();
+        }
 
         return redirect()->back();
     }
@@ -50,14 +54,18 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        Auth::logout();
+        if ($user->id === 1) {
+            return redirect()->back();
+        } else {
+            Auth::logout();
 
-        $user->delete();
+            $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+            return Redirect::to('/');
+        }
     }
 
     public function comments($uid)
