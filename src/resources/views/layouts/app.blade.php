@@ -58,7 +58,7 @@
         @include('layouts.footer')
     </div>
 
-    <div class="fixed bottom-16 right-4 z-50 md:bottom-4 md:w-40 lg:w-64 xl:w-80" id="modal-container">
+    <div class="fixed bottom-16 right-2 z-50 md:bottom-4 md:right-4 md:w-40 lg:w-64 xl:w-80" id="modal-container">
         <x-posts.post-form-modal />
     </div>
 

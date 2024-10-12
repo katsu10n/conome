@@ -42,7 +42,7 @@
             <p class="pt-1">{{ $post->content }}</p>
         </div>
     </div>
-    <div class="flex items-end justify-between pt-1">
+    <div class="flex items-center justify-between pt-1 md:items-end">
         <div
             class="{{ $post->comments->contains('user_id', Auth::id()) ? 'text-green-600' : ' ' }} mr-8 flex items-center gap-2 transition">
             <x-icons.icon-comment class="w-5" />
@@ -63,7 +63,7 @@
             <x-posts.post-nav-dropdown :post="$post" :current-user-id="$currentUserId" />
         </div>
 
-        <p class="text-textLight text-sm">
+        <p class="text-xs text-text-light md:text-sm">
             {{ $post->created_at->format(!$isLink ? 'Y年n月j日 H:i' : 'n月j日 H:i') }}</p>
     </div>
 </div>
