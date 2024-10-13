@@ -8,7 +8,7 @@
 
 https://conome-4e6d09dc0d5e.herokuapp.com/
 
-### 使い方
+### 主な機能
 
 準備中...
 
@@ -30,7 +30,52 @@ https://conome-4e6d09dc0d5e.herokuapp.com/
 
 <br>
 
-## 2. 要件定義
+## 2. 使用技術
+
+準備中...
+
+### 言語
+
+- PHP
+- JavaScript
+
+### フレームワーク
+
+- Laravel
+- Tailwind CSS
+- Next.js（Laravel Blade から移行予定）
+
+### ライブラリ
+
+- Laravel Breeze
+- Alpine.js
+
+### データベース
+
+- PostgreSQL
+
+### ミドルウェア
+
+- Nginx
+
+### インフラ
+
+- Heroku
+- Vercel（Next.js 移行時のフロント側）
+
+### 開発環境・その他
+
+- Docker
+- Git
+- GitHub
+- pgAdmin4
+- Visual Studio Code
+- Mermaid
+- Vite
+
+<br>
+
+## 3. 要件定義
 
 **実装優先度**
 
@@ -125,33 +170,6 @@ https://conome-4e6d09dc0d5e.herokuapp.com/
 - データのバックアップ
 
 </details>
-
-<br>
-
-## 3. URI 設計
-
-| メソッド | URI                         | 説明                                   |
-| -------- | --------------------------- | -------------------------------------- |
-| GET      | /                           | トップ                                 |
-| GET      | /login                      | ログイン                               |
-| GET      | /register                   | 新規登録                               |
-| GET      | /settings                   | アカウント設定                         |
-| GET      | /{uid}                      | プロフィール                           |
-| GET      | /{uid}/comments             | プロフィールのコメントした投稿一覧     |
-| GET      | /{uid}/likes                | プロフィールのいいねした投稿一覧       |
-| GET      | /posts                      | 投稿一覧                               |
-| GET      | /posts/followed             | フォローユーザーの投稿一覧             |
-| GET      | /{uid}/posts/{id}           | 投稿詳細                               |
-| POST     | /posts                      | 投稿作成                               |
-| DELETE   | /posts/{id}                 | 投稿削除                               |
-| GET      | /categories/{slug}          | カテゴリー別投稿一覧                   |
-| GET      | /categories/{slug}/followed | フォローユーザーのカテゴリー別投稿一覧 |
-| POST     | /posts/{id}/comments        | 投稿へのコメント                       |
-| DELETE   | /comments/{id}              | 投稿へのコメントの削除                 |
-| POST     | /categories/{id}/favorite   | カテゴリーのお気に入り                 |
-| POST     | /posts/{id}/like            | 投稿へのいいね                         |
-| POST     | /follow/{user_id}           | ユーザーフォロー                       |
-| DELETE   | /unfollow/{user_id}         | ユーザーフォロー解除                   |
 
 <br>
 
@@ -281,45 +299,96 @@ posts ||--o{ likes: ""
 
 <br>
 
-## 5. 使用技術
+## 5. URI 設計
 
-準備中...
+<details>
+<summary>クリックで詳細が開きます</summary>
+<br>
 
-### 言語
+| メソッド | URI                         | 説明                                   |
+| -------- | --------------------------- | -------------------------------------- |
+| GET      | /                           | トップ                                 |
+| GET      | /login                      | ログイン                               |
+| GET      | /register                   | 新規登録                               |
+| GET      | /settings                   | アカウント設定                         |
+| GET      | /{uid}                      | プロフィール                           |
+| GET      | /{uid}/comments             | プロフィールのコメントした投稿一覧     |
+| GET      | /{uid}/likes                | プロフィールのいいねした投稿一覧       |
+| GET      | /posts                      | 投稿一覧                               |
+| GET      | /posts/followed             | フォローユーザーの投稿一覧             |
+| GET      | /{uid}/posts/{id}           | 投稿詳細                               |
+| POST     | /posts                      | 投稿作成                               |
+| DELETE   | /posts/{id}                 | 投稿削除                               |
+| GET      | /categories/{slug}          | カテゴリー別投稿一覧                   |
+| GET      | /categories/{slug}/followed | フォローユーザーのカテゴリー別投稿一覧 |
+| POST     | /posts/{id}/comments        | 投稿へのコメント                       |
+| DELETE   | /comments/{id}              | 投稿へのコメントの削除                 |
+| POST     | /categories/{id}/favorite   | カテゴリーのお気に入り                 |
+| POST     | /posts/{id}/like            | 投稿へのいいね                         |
+| POST     | /follow/{user_id}           | ユーザーフォロー                       |
+| DELETE   | /unfollow/{user_id}         | ユーザーフォロー解除                   |
 
-- PHP
-- JavaScript
+</details>
 
-### フレームワーク
+<br>
 
-- Laravel
-- Tailwind CSS
-- Next.js（Laravel Blade から移行予定）
+## 6. 環境構築（準備中...）
 
-### ライブラリ
+/src（初回）
 
-- Laravel Breeze
-- Alpine.js
+```
+npm i
+```
 
-### データベース
+### 開発サーバーの立ち上げ
 
-- PostgreSQL
+`Docker.app`を起動
 
-### ミドルウェア
+/
 
-- Nginx
+```
+docker compose up -d
+```
 
-### インフラ
+/src
 
-- Heroku
-- Vercel（Next.js 移行時のフロント側）
+```
+npm run dev
+```
 
-### 開発環境・その他
+http://localhost:8080 にアクセス
 
-- Docker
-- Git
-- GitHub
-- pgAdmin4
-- Visual Studio Code
-- Mermaid
-- Vite
+<br>
+
+## 7. Git 運用ルール
+
+### ブランチ
+
+| ブランチ名 | 役割       |
+| ---------- | ---------- |
+| main       | デプロイ済 |
+| develop    | 開発中     |
+
+### コミットメッセージのプレフィックス
+
+e.g. `feat/add: 投稿作成機能を追加`
+
+| Prefix   | 意味                                       |
+| -------- | ------------------------------------------ |
+| feat     | 機能関連                                   |
+| doc      | ドキュメントの更新                         |
+| db       | データベース関連                           |
+| ui       | 見た目関連                                 |
+| style    | フォーマット、コーディングスタイルの変更   |
+| refactor | コードの改善                               |
+| perf     | パフォーマンスの向上                       |
+| test     | テスト関連                                 |
+| chore    | ビルド、補助ツール、ライブラリ関連、その他 |
+
+| Prefix / Sub | 意味 |
+| ------------ | ---- |
+| /add         | 追加 |
+| /upd         | 更新 |
+| /chg         | 変更 |
+| /del         | 削除 |
+| /fix         | 修正 |
