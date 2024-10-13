@@ -108,7 +108,7 @@
 ### 機能要件
 
 <details>
-<summary>クリックで詳細が開きます</summary>
+<summary>クリックして詳細を開く</summary>
 <br>
 
 **ユーザー管理**
@@ -167,7 +167,7 @@
 ### 非機能要件
 
 <details>
-<summary>クリックで詳細が開きます</summary>
+<summary>クリックして詳細を開く</summary>
 <br>
 
 **セキュリティ**
@@ -325,7 +325,7 @@ posts ||--o{ likes: ""
 ## 5. URI 設計
 
 <details>
-<summary>クリックで詳細が開きます</summary>
+<summary>クリックして詳細を開く</summary>
 <br>
 
 | メソッド | URI                         | 説明                                   |
