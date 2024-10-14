@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
@@ -51,10 +52,15 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $post = Auth::user()->posts()->create($request->validated());
+        try {
+            $post = Auth::user()->posts()->create($request->validated());
 
-        return redirect()->route('posts.index', $post)
-            ->with('success', '投稿「' . $post->title . '」を作成しました');
+            return redirect()->route('posts.index')
+                ->with('success', '投稿「' . $post->title . '」を作成しました');
+        } catch (\Exception $e) {
+            Log::error('投稿作成エラー: ' . $e->getMessage());
+            return back()->withInput()->with('error', '投稿の投稿に失敗しました');
+        }
     }
 
     public function show($uid, Post $post)
