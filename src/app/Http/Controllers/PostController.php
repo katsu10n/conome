@@ -73,13 +73,23 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        if (Auth::id() !== $post->user_id) {
-            return redirect()->route('posts.index');
+        try {
+            if (Auth::id() !== $post->user_id) {
+                throw new \Exception('権限がありません');
+            }
+
+            $post->delete();
+
+            return back()->with('success', '投稿を削除しました');
+        } catch (\Exception $e) {
+            Log::error('投稿削除エラー: ' . $e->getMessage());
+
+            if ($e->getMessage() === '権限がありません') {
+                return back()->with('error', 'この投稿を削除する権限がありません');
+            }
+
+            return back()->with('error', '投稿の削除に失敗しました');
         }
-
-        $post->delete();
-
-        return redirect()->route('posts.index');
     }
 
     public function getPopularPosts()
