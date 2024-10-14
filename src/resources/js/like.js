@@ -1,3 +1,11 @@
+function updateLikeButtonState(button, isLiked) {
+  button.classList.toggle('text-red-500', isLiked);
+  button.classList.toggle('hover:text-red-600', isLiked);
+  button.classList.toggle('text-text-light', !isLiked);
+  button.classList.toggle('hover:text-red-500', !isLiked);
+  button.querySelector('svg').classList.toggle('fill-current', isLiked);
+}
+
 function toggleLike(button) {
   const postId = button.dataset.postId;
   const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
@@ -14,17 +22,8 @@ function toggleLike(button) {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
+        updateLikeButtonState(button, data.isLiked);
         button.dataset.liked = data.isLiked.toString();
-
-        if (data.isLiked) {
-          button.classList.remove('text-text-light', 'hover:text-red-500');
-          button.classList.add('text-red-500', 'hover:text-red-600');
-          button.querySelector('svg').classList.add('fill-current');
-        } else {
-          button.classList.remove('text-red-500', 'hover:text-red-600');
-          button.classList.add('text-text-light', 'hover:text-red-500');
-          button.querySelector('svg').classList.remove('fill-current');
-        }
 
         const likeCount = document.querySelector(
           `.like-count[data-post-id="${postId}"]`,
@@ -37,6 +36,8 @@ function toggleLike(button) {
 
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.like-button').forEach((button) => {
+    updateLikeButtonState(button, button.dataset.liked === 'true');
+
     button.addEventListener('click', function (event) {
       event.preventDefault();
       toggleLike(this);

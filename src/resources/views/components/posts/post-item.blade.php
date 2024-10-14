@@ -59,7 +59,7 @@
             <button
                 class="like-button {{ $post->likes->contains('user_id', Auth::id()) ? 'text-red-500 hover:opacity-70' : ' hover:text-red-500' }} mr-2 flex items-center transition"
                 data-post-id="{{ $post->id }}"
-                data-liked="{{ $post->likes->contains('user_id', Auth::id()) ? 'true' : 'false' }}" type="button">
+                data-liked="{{ $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}" type="button">
                 <x-icons.icon-heart
                     class="{{ $post->likes->contains('user_id', Auth::id()) ? 'fill-current' : '' }} w-6" />
                 <span class="like-count ml-2 text-sm"
