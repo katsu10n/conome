@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
 
         User::factory(20)->create();
         Post::factory(200)->create();
+
         $this->call([
+            FollowSeeder::class,
             PostSeeder::class,
         ]);
     }
