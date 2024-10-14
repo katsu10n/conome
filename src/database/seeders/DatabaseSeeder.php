@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             FollowSeeder::class,
             PostSeeder::class,
+            LikeSeeder::class,
         ]);
     }
 }
