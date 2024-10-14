@@ -11,11 +11,15 @@ class CommentController extends Controller
 {
     public function store(StoreCommentRequest $request, Post $post)
     {
-        $post->comments()->create(
-            $request->validated() + ['user_id' => Auth::id()]
-        );
+        try {
+            $post->comments()->create(
+                $request->validated() + ['user_id' => Auth::id()]
+            );
 
-        return back()->with('success', 'コメントを投稿しました');
+            return back()->with('success', 'コメントを投稿しました');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'コメントの投稿に失敗しました');
+        }
     }
 
     public function destroy(Comment $comment)
