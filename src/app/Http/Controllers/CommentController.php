@@ -25,6 +25,7 @@ class CommentController extends Controller
         }
 
         $comment->delete();
-        return redirect()->back();
+
+        return redirect()->back()->with('success', 'コメントを削除しました');
     }
 }
