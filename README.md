@@ -347,8 +347,7 @@ posts ||--o{ likes: ""
 | DELETE   | /comments/{id}              | 投稿へのコメントの削除                 |
 | POST     | /categories/{id}/favorite   | カテゴリーのお気に入り                 |
 | POST     | /posts/{id}/like            | 投稿へのいいね                         |
-| POST     | /follow/{user_id}           | ユーザーフォロー                       |
-| DELETE   | /unfollow/{user_id}         | ユーザーフォロー解除                   |
+| POST     | /users/{user}/follow        | ユーザーフォロー・フォロー解除         |
 
 </details>
 
