@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -31,19 +32,32 @@ class ProfileController extends Controller
         $user = $request->user();
         $validatedData = $request->validated();
 
-        $user->fill($validatedData);
+        try {
+            if ($user->id === 1) {
+                throw new \Exception('テストユーザーのプロフィールは変更できません');
+            }
 
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
-        }
+            $emailChanged = $user->email !== $validatedData['email'];
 
-        if ($user->id === 1) {
-            return redirect()->back();
-        } else {
+            $user->fill($validatedData);
+
+            if ($emailChanged) {
+                $user->email_verified_at = null;
+            }
+
             $user->save();
-        }
 
-        return redirect()->back();
+            $message = 'プロフィールが更新されました';
+
+            return redirect()->back()->with('success', $message);
+        } catch (\Exception $e) {
+            Log::error('プロフィール更新エラー: ' . $e->getMessage());
+            if ($e->getMessage() === 'テストユーザーのプロフィールは変更できません') {
+                return back()->with('error', 'テストユーザーのプロフィールは変更できません');
+            }
+
+            return back()->with('error', 'プロフィールの更新に失敗しました');
+        }
     }
 
     public function destroy(Request $request): RedirectResponse
