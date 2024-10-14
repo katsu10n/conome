@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
@@ -52,12 +51,10 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $validatedData = $request->validated();
-        $validatedData['user_id'] = Auth::id();
+        $post = Auth::user()->posts()->create($request->validated());
 
-        $post = Post::create($validatedData);
-
-        return redirect()->route('posts.index')->with('success', '投稿が作成されました。');
+        return redirect()->route('posts.index', $post)
+            ->with('success', '投稿「' . $post->title . '」を作成しました');
     }
 
     public function show($uid, Post $post)
@@ -66,11 +63,6 @@ class PostController extends Controller
         $post->load('comments.user');
 
         return view('pages.posts.show', compact('post', 'currentUserId'));
-    }
-
-    public function update(UpdatePostRequest $request, Post $post)
-    {
-        //
     }
 
     public function destroy(Post $post)
