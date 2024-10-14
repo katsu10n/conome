@@ -17,7 +17,29 @@ class ProfileController extends Controller
     {
         $user = User::where('uid', $uid)->withCount('posts')->firstOrFail();
         $posts = $user->posts()->with(['user', 'category', 'comments', 'likes'])->latest()->get();
-        return view('pages.profile.show', compact('user', 'posts'));
+        return view('pages.profile.show', ['user' => $user, 'posts' => $posts]);
+    }
+
+    public function comments($uid)
+    {
+        $user = User::where('uid', $uid)->withCount(['comments'])->firstOrFail();
+        $posts = $user->comments()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
+            ->latest()
+            ->get()
+            ->pluck('post')
+            ->unique();
+        return view('pages.profile.show', ['user' => $user, 'posts' => $posts]);
+    }
+
+    public function likes($uid)
+    {
+        $user = User::where('uid', $uid)->withCount(['likes'])->firstOrFail();
+        $posts = $user->likes()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
+            ->latest()
+            ->get()
+            ->pluck('post')
+            ->unique();
+        return view('pages.profile.show', ['user' => $user, 'posts' => $posts]);
     }
 
     public function edit(Request $request): View
@@ -80,27 +102,5 @@ class ProfileController extends Controller
 
             return Redirect::to('/');
         }
-    }
-
-    public function comments($uid)
-    {
-        $user = User::where('uid', $uid)->withCount(['comments'])->firstOrFail();
-        $posts = $user->comments()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
-            ->latest()
-            ->get()
-            ->pluck('post')
-            ->unique();
-        return view('pages.profile.show', compact('user', 'posts'));
-    }
-
-    public function likes($uid)
-    {
-        $user = User::where('uid', $uid)->withCount(['likes'])->firstOrFail();
-        $posts = $user->likes()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
-            ->latest()
-            ->get()
-            ->pluck('post')
-            ->unique();
-        return view('pages.profile.show', compact('user', 'posts'));
     }
 }
