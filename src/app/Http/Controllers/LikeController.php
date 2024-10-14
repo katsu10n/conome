@@ -10,21 +10,17 @@ class LikeController extends Controller
     public function toggle(Post $post)
     {
         $user = Auth::user();
-        $existing_like = $post->likes()->where('user_id', $user->id)->first();
+        $isLiked = $post->isLikedBy($user);
 
-        if ($existing_like) {
-            $existing_like->delete();
-            $isLiked = false;
+        if ($isLiked) {
+            $user->likePosts()->detach($post->id);
         } else {
-            $post->likes()->create([
-                'user_id' => $user->id,
-            ]);
-            $isLiked = true;
+            $user->likePosts()->attach($post->id);
         }
 
         return response()->json([
             'success' => true,
-            'isLiked' => $isLiked,
+            'isLiked' => !$isLiked,
             'likesCount' => $post->likes()->count()
         ]);
     }

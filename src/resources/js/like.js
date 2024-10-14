@@ -17,12 +17,12 @@ function toggleLike(button) {
         button.dataset.liked = data.isLiked.toString();
 
         if (data.isLiked) {
-          button.classList.remove('text-gray-400', 'hover:text-red-500');
+          button.classList.remove('text-text-light', 'hover:text-red-500');
           button.classList.add('text-red-500', 'hover:text-red-600');
           button.querySelector('svg').classList.add('fill-current');
         } else {
           button.classList.remove('text-red-500', 'hover:text-red-600');
-          button.classList.add('text-gray-400', 'hover:text-red-500');
+          button.classList.add('text-text-light', 'hover:text-red-500');
           button.querySelector('svg').classList.remove('fill-current');
         }
 

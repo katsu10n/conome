@@ -52,14 +52,14 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function likes()
+    public function likePosts()
     {
-        return $this->hasMany(Like::class);
+        return $this->belongsToMany(Post::class, 'likes', 'user_id', 'post_id');
     }
 
     public function favoriteCategories()
     {
-        return $this->belongsToMany(Category::class, 'favorites', 'user_id', 'category_id')->withTimestamps();
+        return $this->belongsToMany(Category::class, 'favorites', 'user_id', 'category_id');
     }
 
     public function comments()
