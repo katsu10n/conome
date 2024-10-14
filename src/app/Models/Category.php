@@ -15,16 +15,16 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
-    public function favorites()
+    public function favoritedByUsers()
     {
-        return $this->hasMany(Favorite::class);
+        return $this->belongsToMany(User::class, 'favorites', 'category_id', 'user_id')->withTimestamps();
     }
 
     protected $appends = ['is_favorited'];
 
     public function getIsFavoritedAttribute()
     {
-        return $this->favorites()->where('user_id', Auth::id())->exists();
+        return $this->favoritedByUsers()->where('users.id', Auth::id())->exists();
     }
 
     public function getRouteKeyName()

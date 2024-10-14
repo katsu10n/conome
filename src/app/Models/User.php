@@ -57,9 +57,9 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
-    public function favorites()
+    public function favoriteCategories()
     {
-        return $this->hasMany(Favorite::class);
+        return $this->belongsToMany(Category::class, 'favorites', 'user_id', 'category_id')->withTimestamps();
     }
 
     public function comments()

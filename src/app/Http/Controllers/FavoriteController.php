@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -13,22 +12,15 @@ class FavoriteController extends Controller
     public function toggle(Request $request, Category $category)
     {
         $user = Auth::user();
+        $toggled = $user->favoriteCategories()->toggle($category->id);
 
-        $favorite = Favorite::where('user_id', $user->id)
-            ->where('category_id', $category->id)
-            ->first();
+        Cache::forget('sidebar_categories_' . $user->id);
 
-        if ($favorite) {
-            $favorite->delete();
-        } else {
-            Favorite::create([
-                'user_id' => $user->id,
-                'category_id' => $category->id
-            ]);
-        }
+        $action = $toggled['attached'] ? 'お気に入り' : 'お気に入り解除';
+        $message = "カテゴリー「{$category->name}」を{$action}しました";
 
-        Cache::forget('sidebar_categories_' . Auth::id());
-
-        return redirect()->back()->withInput(['scroll_to' => $request->input('scroll_position')]);
+        return back()
+            ->withInput(['scroll_to' => $request->input('scroll_position')])
+            ->with('success', $message);
     }
 }
