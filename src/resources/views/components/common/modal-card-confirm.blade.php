@@ -1,8 +1,8 @@
-@props(['title', 'open', 'action', 'method' => 'POST'])
+@props(['open', 'action', 'method' => 'POST', 'confirmText' => '確認'])
 
-<x-common.modal-card :title="$title" :open="$open">
-    <p class="mb-4">{{ $slot }}</p>
-    <div class="flex justify-end space-x-2">
+<x-common.modal-card :open="$open">
+    <p class="-mt-2 mb-4 text-center">{{ $slot }}</p>
+    <div class="flex justify-center space-x-2">
         <button class="rounded bg-gray-300 px-4 py-2 transition ease-out hover:bg-gray"
             @click="{{ $open }} = false">
             キャンセル
@@ -11,7 +11,7 @@
             @csrf
             @method($method)
             <button class="rounded bg-red-500 px-4 py-2 text-white transition ease-out hover:bg-red-600" type="submit">
-                {{ $title }}
+                {{ $confirmText }}
             </button>
         </form>
     </div>

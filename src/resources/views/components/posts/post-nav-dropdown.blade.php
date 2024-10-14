@@ -27,7 +27,7 @@
         </x-slot>
     </x-common.dropdown>
 
-    <x-common.modal-card-confirm title="投稿を削除" open="deleteConfirmOpen" :action="route('posts.destroy', $post)" method="DELETE">
+    <x-common.modal-card-confirm confirmText="削除" open="deleteConfirmOpen" :action="route('posts.destroy', $post)" method="DELETE">
         本当にこの投稿を削除しますか？この操作は取り消せません。
     </x-common.modal-card-confirm>
 </div>
