@@ -3,32 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class FavoriteController extends Controller
 {
     public function toggle(Request $request, Category $category)
     {
-        $user = Auth::user();
+        try {
+            $user = Auth::user();
 
-        $favorite = Favorite::where('user_id', $user->id)
-            ->where('category_id', $category->id)
-            ->first();
+            $toggled = $user->favoriteCategories()->toggle($category->id);
 
-        if ($favorite) {
-            $favorite->delete();
-        } else {
-            Favorite::create([
-                'user_id' => $user->id,
-                'category_id' => $category->id
-            ]);
+            Cache::forget('sidebar_categories_' . $user->id);
+
+            $action = $toggled['attached'] ? 'お気に入り' : 'お気に入り解除';
+            $message = "カテゴリー「{$category->name}」を{$action}しました";
+
+            return back()
+                ->withInput(['scroll_to' => $request->input('scroll_position')])
+                ->with('success', $message);
+        } catch (\Exception $e) {
+            Log::error('お気に入りトグル中にエラー ' . $e->getMessage());
+            return back()->with('error', 'お気に入りの更新中にエラーが発生しました');
         }
-
-        Cache::forget('sidebar_categories_' . Auth::id());
-
-        return redirect()->back()->withInput(['scroll_to' => $request->input('scroll_position')]);
     }
 }

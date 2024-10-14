@@ -32,7 +32,6 @@
 
 ### 開発背景
 
-- 某有名SNSでは見たくないものが沢山流れてくる
 - 「これが好き」という純粋な気持ちで交流したい
 - 「好き」を共有したり新たな発見をしたい
 
@@ -92,7 +91,7 @@
 | Visual Studio Code | 1.94.2     | ソースコードエディター           |
 | Git                | 2.45.2     | バージョン管理                   |
 | GitHub             | *          | ソースコード管理                 |
-| pgAdmin4           | 8.12       | PostgreSQL GUI管理ツール         |
+| pgAdmin4           | 8.12       | PostgreSQL GUI管理               |
 | Mermaid            | 11.2.1     | ER図作成                         |
 
 <br>
@@ -348,8 +347,7 @@ posts ||--o{ likes: ""
 | DELETE   | /comments/{id}              | 投稿へのコメントの削除                 |
 | POST     | /categories/{id}/favorite   | カテゴリーのお気に入り                 |
 | POST     | /posts/{id}/like            | 投稿へのいいね                         |
-| POST     | /follow/{user_id}           | ユーザーフォロー                       |
-| DELETE   | /unfollow/{user_id}         | ユーザーフォロー解除                   |
+| POST     | /users/{user}/follow        | ユーザーフォロー・フォロー解除         |
 
 </details>
 

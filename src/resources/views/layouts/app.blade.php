@@ -25,6 +25,9 @@
     <div class="loading">
         <div></div>
     </div>
+
+    <x-common.flash-message />
+
     <div class="relative mx-auto max-w-screen-xl px-4 sm:px-6 md:mb-16 md:px-8" id="container">
         @include('layouts.header')
 

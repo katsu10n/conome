@@ -3,26 +3,35 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class StoreCommentRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'content' => 'required|max:500',
+        ];
+    }
+
+    protected function failedValidation(Validator $validator): void
+    {
+        throw new HttpResponseException(
+            redirect()->back()->withInput()->with('error', 'コメントの投稿に失敗しました')->withErrors($validator)
+        );
+    }
+
+    public function messages()
+    {
+        return [
+            'content.required' => 'コメント内容は必須です',
+            'content.max' => 'コメントは:max文字以内で入力してください',
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -16,7 +17,29 @@ class ProfileController extends Controller
     {
         $user = User::where('uid', $uid)->withCount('posts')->firstOrFail();
         $posts = $user->posts()->with(['user', 'category', 'comments', 'likes'])->latest()->get();
-        return view('pages.profile.show', compact('user', 'posts'));
+        return view('pages.profile.show', ['user' => $user, 'posts' => $posts]);
+    }
+
+    public function comments($uid)
+    {
+        $user = User::where('uid', $uid)->withCount(['comments'])->firstOrFail();
+        $posts = $user->comments()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
+            ->latest()
+            ->get()
+            ->pluck('post')
+            ->unique();
+        return view('pages.profile.show', ['user' => $user, 'posts' => $posts]);
+    }
+
+    public function likes($uid)
+    {
+        $user = User::where('uid', $uid)->withCount(['likes'])->firstOrFail();
+        $posts = $user->likes()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
+            ->latest()
+            ->get()
+            ->pluck('post')
+            ->unique();
+        return view('pages.profile.show', ['user' => $user, 'posts' => $posts]);
     }
 
     public function edit(Request $request): View
@@ -31,19 +54,32 @@ class ProfileController extends Controller
         $user = $request->user();
         $validatedData = $request->validated();
 
-        $user->fill($validatedData);
+        try {
+            if ($user->id === 1) {
+                throw new \Exception('テストユーザーのプロフィールは変更できません');
+            }
 
-        if ($user->isDirty('email')) {
-            $user->email_verified_at = null;
-        }
+            $emailChanged = $user->email !== $validatedData['email'];
 
-        if ($user->id === 1) {
-            return redirect()->back();
-        } else {
+            $user->fill($validatedData);
+
+            if ($emailChanged) {
+                $user->email_verified_at = null;
+            }
+
             $user->save();
-        }
 
-        return redirect()->back();
+            $message = 'プロフィールが更新されました';
+
+            return redirect()->back()->with('success', $message);
+        } catch (\Exception $e) {
+            Log::error('プロフィール更新エラー: ' . $e->getMessage());
+            if ($e->getMessage() === 'テストユーザーのプロフィールは変更できません') {
+                return back()->with('error', 'テストユーザーのプロフィールは変更できません');
+            }
+
+            return back()->with('error', 'プロフィールの更新に失敗しました');
+        }
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -66,27 +102,5 @@ class ProfileController extends Controller
 
             return Redirect::to('/');
         }
-    }
-
-    public function comments($uid)
-    {
-        $user = User::where('uid', $uid)->withCount(['comments'])->firstOrFail();
-        $posts = $user->comments()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
-            ->latest()
-            ->get()
-            ->pluck('post')
-            ->unique();
-        return view('pages.profile.show', compact('user', 'posts'));
-    }
-
-    public function likes($uid)
-    {
-        $user = User::where('uid', $uid)->withCount(['likes'])->firstOrFail();
-        $posts = $user->likes()->with(['post.user', 'post.category', 'post.comments', 'post.likes'])
-            ->latest()
-            ->get()
-            ->pluck('post')
-            ->unique();
-        return view('pages.profile.show', compact('user', 'posts'));
     }
 }

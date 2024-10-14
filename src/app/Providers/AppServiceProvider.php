@@ -21,12 +21,12 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['layouts.sidebar-left', 'components.posts.post-form'], function ($view) {
             $categories = Cache::remember('sidebar_categories_' . Auth::id(), now()->addHours(24), function () {
                 $categories = Category::select('id', 'name', 'slug')
-                    ->withCount(['favorites' => function ($query) {
-                        $query->where('user_id', Auth::id());
+                    ->withCount(['favoritedByUsers' => function ($query) {
+                        $query->where('users.id', Auth::id());
                     }])
                     ->get()
                     ->map(function ($category) {
-                        $category->is_favorited = $category->favorites_count > 0;
+                        $category->is_favorited = $category->favorited_by_users_count > 0;
                         return $category;
                     });
 

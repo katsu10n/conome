@@ -46,7 +46,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/{uid}/comments', [ProfileController::class, 'comments'])->name('profile.comments');
     Route::get('/{uid}/likes', [ProfileController::class, 'likes'])->name('profile.likes');
 
-    Route::post('/follow/{user}', [FollowController::class, 'follow'])->name('follow');
-    Route::delete('/unfollow/{user}', [FollowController::class, 'unfollow'])->name('unfollow');
+    Route::post('/users/{user}/follow', [FollowController::class, 'toggle'])->name('users.follow');
 });
 require __DIR__ . '/auth.php';
