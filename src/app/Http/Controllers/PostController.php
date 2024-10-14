@@ -10,44 +10,46 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    private function buildQuery($category = null, $followedUserIds = null)
+    {
+        $query = Post::with(['user', 'category'])->orderBy('created_at', 'desc');
+
+        if ($category) {
+            $query->where('category_id', $category->id);
+        }
+
+        if ($followedUserIds) {
+            $query->whereIn('user_id', $followedUserIds);
+        }
+
+        return $query;
+    }
+
     public function index(Category $category = null)
     {
         $currentUserId = Auth::id();
+        $posts = $this->buildQuery($category)->get();
 
-        $postsQuery = Post::with(['user', 'category'])
-            ->orderBy('created_at', 'desc');
-
-        if ($category) {
-            $postsQuery->where('category_id', $category->id);
-        }
-
-        $posts = $postsQuery->get()->map(function ($post) {
-            return $post;
-        });
-
-        return view('pages.posts.index', compact('posts', 'currentUserId', 'category'));
+        return view('pages.posts.index', [
+            'posts' => $posts,
+            'currentUserId' => $currentUserId,
+            'category' => $category,
+            'isFollowedPosts' => false
+        ]);
     }
 
     public function indexFollowed(Category $category = null)
     {
         $currentUserId = Auth::id();
         $followedUserIds = Auth::user()->following()->pluck('users.id');
+        $posts = $this->buildQuery($category, $followedUserIds)->get();
 
-        $postsQuery = Post::with(['user', 'category'])
-            ->whereIn('user_id', $followedUserIds)
-            ->orderBy('created_at', 'desc');
-
-        if ($category) {
-            $postsQuery->where('category_id', $category->id);
-        }
-
-        $posts = $postsQuery->get()->map(function ($post) {
-            return $post;
-        });
-
-        $isFollowedPosts = true;
-
-        return view('pages.posts.index', compact('posts', 'currentUserId', 'isFollowedPosts', 'category'));
+        return view('pages.posts.index', [
+            'posts' => $posts,
+            'currentUserId' => $currentUserId,
+            'category' => $category,
+            'isFollowedPosts' => true
+        ]);
     }
 
     public function store(StorePostRequest $request)
