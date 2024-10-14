@@ -85,7 +85,7 @@ class PostController extends Controller
             $post->delete();
 
             return redirect()->route('posts.index')
-                ->with('success', '投稿を削除しました');
+                ->with('success', '投稿「' . $post->title . '」を削除しました');
         } catch (\Exception $e) {
             Log::error('投稿削除エラー: ' . $e->getMessage());
 
