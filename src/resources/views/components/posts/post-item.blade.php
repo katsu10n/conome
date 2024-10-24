@@ -56,15 +56,7 @@
             <span>{{ $post->comments->count() }}</span>
         </div>
         <div class="mr-8 flex items-center">
-            <button
-                class="like-button {{ $post->likes->contains('user_id', Auth::id()) ? 'text-red-500 hover:opacity-70' : ' hover:text-red-500' }} mr-2 flex items-center transition"
-                data-post-id="{{ $post->id }}"
-                data-liked="{{ $post->isLikedBy(Auth::user()) ? 'true' : 'false' }}" type="button">
-                <x-icons.icon-heart
-                    class="{{ $post->likes->contains('user_id', Auth::id()) ? 'fill-current' : '' }} w-6" />
-                <span class="like-count ml-2 text-sm"
-                    data-post-id="{{ $post->id }}">{{ $post->likes->count() }}</span>
-            </button>
+            <livewire:like-button :post="$post" :wire:key="'like-button-'.$post->id" />
         </div>
         <div class="post-dropdown -mb-[5px]">
             <x-posts.post-nav-dropdown :post="$post" :current-user-id="$currentUserId" />
