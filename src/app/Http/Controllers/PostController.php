@@ -10,29 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    private function buildQuery($category = null, $followedUserIds = null)
-    {
-        $query = Post::with(['user', 'category'])->orderBy('created_at', 'desc');
-
-        if ($category) {
-            $query->where('category_id', $category->id);
-        }
-
-        if ($followedUserIds) {
-            $query->whereIn('user_id', $followedUserIds);
-        }
-
-        return $query;
-    }
-
     public function index(Category $category = null)
     {
-        $currentUserId = Auth::id();
-        $posts = $this->buildQuery($category)->get();
-
         return view('pages.posts.index', [
-            'posts' => $posts,
-            'currentUserId' => $currentUserId,
             'category' => $category,
             'isFollowedPosts' => false
         ]);
@@ -40,13 +20,7 @@ class PostController extends Controller
 
     public function indexFollowed(Category $category = null)
     {
-        $currentUserId = Auth::id();
-        $followedUserIds = Auth::user()->following()->pluck('users.id');
-        $posts = $this->buildQuery($category, $followedUserIds)->get();
-
         return view('pages.posts.index', [
-            'posts' => $posts,
-            'currentUserId' => $currentUserId,
             'category' => $category,
             'isFollowedPosts' => true
         ]);
